@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plataformas Web Chile — Desarrollo y asesorías web</title>
+<meta name="description" content="Desarrollo de sitios, tiendas online y sistemas a medida en Chile. Del diseño al deploy.">
+<!-- Version en evaluacion: no debe indexarse mientras se decide cual queda. -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══ V1 · EDITORIAL ═══════════════════════════════════════════════════════
+     La tipografía es el diseño. Cero tarjetas, cero glow, cero gradientes,
+     cero sombras. Reglas horizontales y numeración como un índice de revista.
+     Serif alta para los titulares (Instrument Serif) contra una grotesca neutra
+     para el resto: ese contraste es lo que no produce una plantilla.        */
+  :root{
+    --papel:#F4F1EA; --tinta:#16181C; --tinta-2:#5A5F69;
+    --linea:#D6D1C6; --acento:#1F49E0;
+    --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
+    --sans:"Instrument Sans","Segoe UI",system-ui,sans-serif;
+    --maxw:1180px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--papel:#111214;--tinta:#EDEAE3;--tinta-2:#989DA6;
+      --linea:#2A2D33;--acento:#6E8CFF}
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--papel);color:var(--tinta);font-family:var(--sans);
+    font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  a:focus-visible{outline:2px solid var(--acento);outline-offset:3px}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,56px)}
+  h1,h2,h3{margin:0;font-weight:400}
+
+  /* Barra: sin fondo, sin blur, solo una regla abajo. */
+  header.top{border-bottom:1px solid var(--linea)}
+  .top-in{display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding:22px 0}
+  .marca{font-family:var(--serif);font-size:21px;letter-spacing:-.01em}
+  .marca i{font-style:italic;color:var(--tinta-2)}
+  .top-nav{display:flex;gap:28px;font-size:14px;color:var(--tinta-2)}
+  .top-nav a{padding-bottom:2px;border-bottom:1px solid transparent;transition:border-color .2s,color .2s}
+  .top-nav a:hover{color:var(--tinta);border-color:var(--tinta)}
+  @media (max-width:680px){.top-nav{display:none}}
+
+  /* Hero: el titular ocupa la pantalla. Nada más compite con él. */
+  .hero{padding:clamp(56px,11vw,132px) 0 clamp(40px,7vw,84px)}
+  .hero h1{font-family:var(--serif);font-size:clamp(46px,10.5vw,124px);line-height:.94;
+    letter-spacing:-.035em;text-wrap:balance;max-width:14ch}
+  .hero h1 em{font-style:italic;color:var(--acento)}
+  .hero-bajo{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:end;
+    margin-top:clamp(28px,5vw,56px);padding-top:26px;border-top:1px solid var(--linea)}
+  @media (max-width:680px){.hero-bajo{grid-template-columns:1fr;align-items:start}}
+  .hero-bajo p{max-width:46ch;color:var(--tinta-2);font-size:clamp(16px,2vw,19px)}
+  .enlace-flecha{font-size:17px;font-weight:500;display:inline-flex;align-items:center;gap:10px;
+    border-bottom:1px solid var(--tinta);padding-bottom:3px;transition:gap .22s,border-color .22s}
+  .enlace-flecha:hover{gap:16px;border-color:var(--acento);color:var(--acento)}
+
+  /* Índice de servicios: filas con regla, número al margen. Como un sumario. */
+  .seccion{padding:clamp(48px,8vw,104px) 0}
+  .rotulo{display:flex;align-items:baseline;gap:14px;margin-bottom:clamp(24px,4vw,44px);
+    font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-2)}
+  .rotulo::after{content:"";flex:1;height:1px;background:var(--linea)}
+  .indice{border-top:1px solid var(--linea)}
+  .fila{display:grid;grid-template-columns:76px minmax(0,1.05fr) minmax(0,1.25fr);gap:24px;
+    align-items:start;padding:clamp(22px,3vw,34px) 0;border-bottom:1px solid var(--linea);
+    transition:padding-left .3s cubic-bezier(.4,0,.2,1),color .3s}
+  .fila:hover{padding-left:14px}
+  .fila .n{font-family:var(--serif);font-size:19px;color:var(--tinta-2);font-variant-numeric:tabular-nums}
+  .fila h3{font-family:var(--serif);font-size:clamp(25px,3.6vw,40px);line-height:1.05;letter-spacing:-.02em}
+  .fila:hover h3{color:var(--acento)}
+  .fila p{color:var(--tinta-2);font-size:16px;max-width:44ch}
+  @media (max-width:760px){
+    .fila{grid-template-columns:44px 1fr;gap:14px}
+    .fila p{grid-column:2}
+  }
+
+  /* Proceso: tres columnas separadas por reglas verticales, sin cajas. */
+  .etapas{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--linea)}
+  .etapa{padding:clamp(24px,3.4vw,38px) clamp(18px,2.4vw,32px);border-right:1px solid var(--linea)}
+  .etapa:last-child{border-right:0}
+  .etapa .n{font-family:var(--serif);font-size:clamp(44px,6vw,76px);line-height:1;color:var(--linea);
+    display:block;margin-bottom:14px}
+  .etapa h3{font-family:var(--serif);font-size:23px;margin-bottom:8px;letter-spacing:-.01em}
+  .etapa p{color:var(--tinta-2);font-size:15.5px}
+  @media (max-width:760px){
+    .etapas{grid-template-columns:1fr}
+    .etapa{border-right:0;border-bottom:1px solid var(--linea)}
+    .etapa:last-child{border-bottom:0}
+  }
+
+  /* Cierre: una frase grande y un correo. Sin banda de color, sin botón relleno. */
+  .cierre{padding:clamp(56px,9vw,116px) 0;border-top:1px solid var(--linea)}
+  .cierre h2{font-family:var(--serif);font-size:clamp(34px,6.6vw,74px);line-height:1;
+    letter-spacing:-.03em;max-width:16ch}
+  .cierre h2 em{font-style:italic;color:var(--acento)}
+  .correo{display:inline-block;margin-top:clamp(24px,4vw,44px);font-family:var(--serif);
+    font-size:clamp(21px,3.4vw,36px);border-bottom:2px solid var(--acento);padding-bottom:4px;
+    transition:opacity .2s}
+  .correo:hover{opacity:.62}
+  .pie{border-top:1px solid var(--linea);padding:26px 0 40px;display:flex;justify-content:space-between;
+    gap:20px;flex-wrap:wrap;font-size:14px;color:var(--tinta-2)}
+  .pie a:hover{color:var(--tinta)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="marca" href="#top">Plataformas Web <i>Chile</i></a>
+    <nav class="top-nav">
+      <a href="#servicios">Servicios</a>
+      <a href="#proceso">Cómo trabajamos</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero wrap" id="top">
+  <h1>Construimos la plataforma que tu negocio <em>necesita</em>.</h1>
+  <div class="hero-bajo">
+    <p>Sitios, tiendas online y sistemas a medida para PyMEs chilenas. Del diseño al deploy, con tecnología moderna y foco en resultados.</p>
+    <a class="enlace-flecha" href="#contacto">Conversemos <span aria-hidden="true">→</span></a>
+  </div>
+</section>
+
+<section class="seccion wrap" id="servicios">
+  <div class="rotulo">Servicios</div>
+  <div class="indice">
+    <article class="fila">
+      <span class="n">01</span>
+      <h3>Sitios web a medida</h3>
+      <p>Landing pages y sitios corporativos rápidos, modernos y optimizados para Google.</p>
+    </article>
+    <article class="fila">
+      <span class="n">02</span>
+      <h3>Tiendas online</h3>
+      <p>E-commerce con pasarela de pago, despacho y catálogo. Listo para vender.</p>
+    </article>
+    <article class="fila">
+      <span class="n">03</span>
+      <h3>Sistemas a medida</h3>
+      <p>Plataformas y automatizaciones para tu operación: pedidos, stock, clientes.</p>
+    </article>
+    <article class="fila">
+      <span class="n">04</span>
+      <h3>Asesoría técnica</h3>
+      <p>Te acompañamos en decisiones de tecnología, hosting, SEO y crecimiento.</p>
+    </article>
+  </div>
+</section>
+
+<section class="seccion wrap" id="proceso">
+  <div class="rotulo">Cómo trabajamos</div>
+  <div class="etapas">
+    <article class="etapa">
+      <span class="n">01</span>
+      <h3>Descubrimiento</h3>
+      <p>Entendemos tu negocio, objetivos y alcance. Definimos qué construir y por qué.</p>
+    </article>
+    <article class="etapa">
+      <span class="n">02</span>
+      <h3>Diseño y desarrollo</h3>
+      <p>Diseñamos e implementamos la plataforma con tecnología moderna y buenas prácticas.</p>
+    </article>
+    <article class="etapa">
+      <span class="n">03</span>
+      <h3>Deploy y soporte</h3>
+      <p>Publicamos, medimos y te acompañamos para que la plataforma siga creciendo.</p>
+    </article>
+  </div>
+</section>
+
+<section class="cierre wrap" id="contacto">
+  <h2>Cuéntanos qué necesitas y te preparamos una <em>propuesta</em>.</h2>
+  <a class="correo" href="mailto:plataformasweb.chile@gmail.com?subject=Quiero%20cotizar%20un%20proyecto%20web">plataformasweb.chile@gmail.com</a>
+</section>
+</main>
+
+<footer class="wrap pie">
+  <span>© 2026 Plataformas Web Chile</span>
+  <a href="https://instagram.com/plataformasweb.chile" target="_blank" rel="noopener">Instagram ↗</a>
+</footer>
+
+</body>
+</html>
