@@ -4,13 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Plataformas Web Chile — Desarrollo y asesorías web</title>
-<meta name="description" content="Desarrollo de sitios, tiendas online y sistemas a medida en Chile. Del diseño al deploy, con tecnología moderna y foco en resultados.">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="description" content="Desarrollo de sitios, tiendas online y sistemas a medida en Chile. Del diseño al deploy.">
 <meta property="og:title" content="Plataformas Web Chile — Desarrollo y asesorías web">
 <meta property="og:description" content="Sitios, tiendas online y sistemas a medida. Del diseño al deploy.">
 <meta property="og:type" content="website">
-<!-- URL absoluta y en PNG: WhatsApp, Facebook y LinkedIn no renderizan SVG ni resuelven
-     rutas relativas, así que con la portada .svg el enlace se compartía sin imagen. -->
 <meta property="og:url" content="https://asoto0210.github.io/plataformas-web-chile/">
 <meta property="og:image" content="https://asoto0210.github.io/plataformas-web-chile/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -21,387 +18,192 @@
 <link rel="canonical" href="https://asoto0210.github.io/plataformas-web-chile/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://asoto0210.github.io/plataformas-web-chile/og-image.png">
-<meta name="theme-color" content="#0B1220" media="(prefers-color-scheme:dark)">
-<meta name="theme-color" content="#F4F7FC" media="(prefers-color-scheme:light)">
-<!-- Tipografía: Space Grotesk da carácter a los titulares (geométrica, un poco rara en la
-     "a" y la "g"), Manrope es neutra y muy legible en cuerpo, JetBrains Mono para las
-     etiquetas técnicas. Si no cargan, el stack del sistema toma el relevo sin romper nada. -->
+<!-- Color de la barra del navegador movil, ajustado al papel/tinta de esta version. -->
+<meta name="theme-color" content="#F4F1EA" media="(prefers-color-scheme:light)">
+<meta name="theme-color" content="#111214" media="(prefers-color-scheme:dark)">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+  /* ═══ V1 · EDITORIAL ═══════════════════════════════════════════════════════
+     La tipografía es el diseño. Cero tarjetas, cero glow, cero gradientes,
+     cero sombras. Reglas horizontales y numeración como un índice de revista.
+     Serif alta para los titulares (Instrument Serif) contra una grotesca neutra
+     para el resto: ese contraste es lo que no produce una plantilla.        */
   :root{
-    --ink:#0B1220;--surface:#111C33;--surface-2:#0E1729;
-    --line:rgba(234,240,250,.10);--line-strong:rgba(234,240,250,.18);
-    --blue:#2F6BFF;--blue-soft:#5B8CFF;--teal:#2CE4C4;
-    --fg:#EAF0FA;--muted:#8A97AD;--muted-2:#5F6B82;--card:#0F1930;
-    --radius:18px;--maxw:1120px;
-    --sans:"Manrope","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
-    --display:"Space Grotesk","Manrope","Segoe UI",system-ui,sans-serif;
-    --mono:"JetBrains Mono",ui-monospace,"Cascadia Code","SFMono-Regular","Consolas",monospace;
-    /* Sombras tintadas con el azul del fondo en vez de negro puro: el negro sobre una
-       superficie azulada se ve sucio, como una mancha gris. */
-    --shadow-lg:0 30px 80px -30px rgba(4,10,26,.75);
-    --shadow-md:0 14px 34px -16px rgba(4,10,26,.6);
-    --shadow-sm:0 8px 24px -12px rgba(4,10,26,.55);
+    --papel:#F4F1EA; --tinta:#16181C; --tinta-2:#5A5F69;
+    --linea:#D6D1C6; --acento:#1F49E0;
+    --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
+    --sans:"Instrument Sans","Segoe UI",system-ui,sans-serif;
+    --maxw:1180px;
   }
-  @media (prefers-color-scheme:light){
-    :root{--ink:#F4F7FC;--surface:#FFFFFF;--surface-2:#EEF3FB;
-      --line:rgba(11,18,32,.10);--line-strong:rgba(11,18,32,.16);
-      --fg:#0B1220;--muted:#54617A;--muted-2:#8A97AD;--card:#FFFFFF;
-      --blue:#245BE0;--teal:#12B79B;
-      /* En claro la sombra se tiñe de azul frío y baja mucho la opacidad. */
-      --shadow-lg:0 30px 60px -28px rgba(36,91,224,.28);
-      --shadow-md:0 14px 30px -14px rgba(36,91,224,.20);
-      --shadow-sm:0 6px 18px -10px rgba(36,91,224,.18);}
+  @media (prefers-color-scheme:dark){
+    :root{--papel:#111214;--tinta:#EDEAE3;--tinta-2:#989DA6;
+      --linea:#2A2D33;--acento:#6E8CFF}
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-  body{margin:0;background:var(--ink);color:var(--fg);font-family:var(--sans);line-height:1.65;
-    -webkit-font-smoothing:antialiased;overflow-x:hidden}
-  /* Grano fijo sobre todo el documento: rompe la planitud del vector puro. Muy sutil
-     (3,5%) — no se ve, se nota. */
-  body::after{content:"";position:fixed;inset:0;z-index:999;pointer-events:none;opacity:.035;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
+  body{margin:0;background:var(--papel);color:var(--tinta);font-family:var(--sans);
+    font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
   a{color:inherit;text-decoration:none}
-  /* Accesibilidad: foco visible para quien navega con teclado (antes no había ninguno). */
-  a:focus-visible,button:focus-visible,.btn:focus-visible{outline:2px solid var(--teal);
-    outline-offset:3px;border-radius:6px}
-  .skip{position:absolute;left:-9999px;top:8px;z-index:200;background:var(--blue);color:#fff;
-    padding:10px 16px;border-radius:10px;font-weight:600}
+  a:focus-visible{outline:2px solid var(--acento);outline-offset:3px}
+  .skip{position:absolute;left:-9999px;top:8px;z-index:200;background:var(--acento);color:#fff;
+    padding:10px 16px;font-weight:600}
   .skip:focus{left:16px}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(18px,4vw,40px)}
-  h1,h2,h3{margin:0;text-wrap:balance;font-family:var(--display);font-weight:700;
-    letter-spacing:-.03em;line-height:1.06}
-  p{margin:0;text-wrap:pretty}
-  .eyebrow{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.18em;
-    text-transform:uppercase;color:var(--teal)}
-  nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);
-    background:color-mix(in srgb,var(--ink) 82%,transparent);border-bottom:1px solid var(--line)}
-  .nav-in{display:flex;align-items:center;justify-content:space-between;gap:20px;height:66px}
-  .brand{display:flex;align-items:center;gap:11px}
-  .brand .wm{font-weight:800;font-size:16px;letter-spacing:-.01em}
-  .brand .wm .thin{color:var(--muted);font-weight:400}
-  .nav-links{display:flex;gap:26px;font-size:14.5px;color:var(--muted)}
-  .nav-links a{position:relative;padding:4px 0;transition:color .2s}
-  .nav-links a:hover{color:var(--fg)}
-  /* Sección actual marcada en la barra: antes no había forma de saber dónde estabas. */
-  .nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;
-    border-radius:2px;background:var(--teal);transform:scaleX(0);transform-origin:left;
-    transition:transform .28s cubic-bezier(.4,0,.2,1)}
-  .nav-links a[aria-current="true"]{color:var(--fg)}
-  .nav-links a[aria-current="true"]::after{transform:scaleX(1)}
-  @media (max-width:720px){.nav-links{display:none}}
-  /* Entrada escalonada al hacer scroll. Se activa por JS añadiendo .in; si el visitante
-     pidió menos movimiento, todo queda visible de inmediato. */
-  .reveal{opacity:0;transform:translateY(18px);
-    transition:opacity .6s cubic-bezier(.4,0,.2,1),transform .6s cubic-bezier(.4,0,.2,1)}
-  .reveal.in{opacity:1;transform:none}
-  @media (prefers-reduced-motion:reduce){
-    .reveal{opacity:1;transform:none;transition:none}
-    .card:hover,.btn:hover,.btn:active{transform:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,56px)}
+  h1,h2,h3{margin:0;font-weight:400}
+
+  /* Barra: sin fondo, sin blur, solo una regla abajo. */
+  header.top{border-bottom:1px solid var(--linea)}
+  .top-in{display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding:22px 0}
+  .marca{font-family:var(--serif);font-size:21px;letter-spacing:-.01em}
+  .marca i{font-style:italic;color:var(--tinta-2)}
+  .top-nav{display:flex;gap:28px;font-size:14px;color:var(--tinta-2)}
+  .top-nav a{padding-bottom:2px;border-bottom:1px solid transparent;transition:border-color .2s,color .2s}
+  .top-nav a:hover{color:var(--tinta);border-color:var(--tinta)}
+  @media (max-width:680px){.top-nav{display:none}}
+
+  /* Hero: el titular ocupa la pantalla. Nada más compite con él. */
+  .hero{padding:clamp(56px,11vw,132px) 0 clamp(40px,7vw,84px)}
+  .hero h1{font-family:var(--serif);font-size:clamp(46px,10.5vw,124px);line-height:.94;
+    letter-spacing:-.035em;text-wrap:balance;max-width:14ch}
+  .hero h1 em{font-style:italic;color:var(--acento)}
+  .hero-bajo{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:end;
+    margin-top:clamp(28px,5vw,56px);padding-top:26px;border-top:1px solid var(--linea)}
+  @media (max-width:680px){.hero-bajo{grid-template-columns:1fr;align-items:start}}
+  .hero-bajo p{max-width:46ch;color:var(--tinta-2);font-size:clamp(16px,2vw,19px)}
+  .enlace-flecha{font-size:17px;font-weight:500;display:inline-flex;align-items:center;gap:10px;
+    border-bottom:1px solid var(--tinta);padding-bottom:3px;transition:gap .22s,border-color .22s}
+  .enlace-flecha:hover{gap:16px;border-color:var(--acento);color:var(--acento)}
+
+  /* Índice de servicios: filas con regla, número al margen. Como un sumario. */
+  .seccion{padding:clamp(48px,8vw,104px) 0}
+  .rotulo{display:flex;align-items:baseline;gap:14px;margin-bottom:clamp(24px,4vw,44px);
+    font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-2)}
+  .rotulo::after{content:"";flex:1;height:1px;background:var(--linea)}
+  .indice{border-top:1px solid var(--linea)}
+  .fila{display:grid;grid-template-columns:76px minmax(0,1.05fr) minmax(0,1.25fr);gap:24px;
+    align-items:start;padding:clamp(22px,3vw,34px) 0;border-bottom:1px solid var(--linea);
+    transition:padding-left .3s cubic-bezier(.4,0,.2,1),color .3s}
+  .fila:hover{padding-left:14px}
+  .fila .n{font-family:var(--serif);font-size:19px;color:var(--tinta-2);font-variant-numeric:tabular-nums}
+  .fila h3{font-family:var(--serif);font-size:clamp(25px,3.6vw,40px);line-height:1.05;letter-spacing:-.02em}
+  .fila:hover h3{color:var(--acento)}
+  .fila p{color:var(--tinta-2);font-size:16px;max-width:44ch}
+  @media (max-width:760px){
+    .fila{grid-template-columns:44px 1fr;gap:14px}
+    .fila p{grid-column:2}
   }
-  .btn{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:14.5px;
-    border-radius:11px;padding:12px 19px;border:1px solid transparent;cursor:pointer;
-    transition:background .2s,border-color .2s,transform .12s cubic-bezier(.4,0,.2,1),box-shadow .2s}
-  .btn-primary{background:var(--blue);color:#fff;box-shadow:var(--shadow-sm)}
-  .btn-primary:hover{background:var(--blue-soft);transform:translateY(-2px);box-shadow:var(--shadow-md)}
-  .btn-ghost{border-color:var(--line-strong);color:var(--fg)}
-  .btn-ghost:hover{border-color:var(--fg);transform:translateY(-2px)}
-  /* Respuesta al clic: sin esto el botón se siente muerto bajo el dedo. */
-  .btn:active{transform:translateY(1px) scale(.985);box-shadow:none}
-  header.hero{position:relative;padding:clamp(64px,10vw,120px) 0 clamp(50px,8vw,90px);overflow:hidden}
-  header.hero::before{content:"";position:absolute;inset:0;z-index:-1;
-    background:radial-gradient(760px 420px at 82% -6%,rgba(47,107,255,.18),transparent 62%),
-               radial-gradient(620px 380px at -4% 108%,rgba(44,228,196,.10),transparent 58%)}
-  header.hero::after{content:"";position:absolute;inset:0;z-index:-1;opacity:.4;
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:38px 38px;mask-image:radial-gradient(70% 60% at 80% 12%,#000,transparent 72%)}
-  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
-  @media (max-width:820px){.hero-grid{grid-template-columns:1fr;gap:36px}}
-  .hero-copy{display:flex;flex-direction:column;gap:22px}
-  .hero h1{font-size:clamp(36px,6.2vw,62px);letter-spacing:-.035em}
-  /* El texto relleno con gradiente es la huella más reconocible del diseño generado.
-     Aquí el acento se marca con un trazo bajo la palabra —el mismo gradiente de la marca,
-     pero como subrayado— que además evoca las capas del logo. */
-  .hero h1 .accent{position:relative;white-space:nowrap;color:var(--fg)}
-  .hero h1 .accent::after{content:"";position:absolute;left:0;right:0;bottom:.06em;height:.14em;
-    border-radius:99px;background:linear-gradient(90deg,var(--blue),var(--teal));opacity:.9}
-  @media (max-width:520px){.hero h1 .accent{white-space:normal}}
-  .hero p.lead{font-size:clamp(16px,2vw,19px);color:var(--muted);max-width:52ch;font-weight:400}
-  .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:4px}
-  .hero-meta{display:flex;gap:22px;flex-wrap:wrap;margin-top:12px;color:var(--muted);font-size:13.5px;font-family:var(--mono);font-variant-numeric:tabular-nums}
-  .hero-meta b{color:var(--fg);font-weight:600}
-  .hero-visual{position:relative;display:flex;align-items:center;justify-content:center}
-  .glasscard{border:1px solid var(--line-strong);border-radius:24px;background:linear-gradient(180deg,var(--surface),var(--surface-2));
-    padding:clamp(28px,4vw,44px);width:100%;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
-  .glasscard .layers{display:flex;flex-direction:column;align-items:center;gap:0}
-  .plate{height:26px;border-radius:8px;box-shadow:var(--shadow-sm)}
-  .plate.l1{width:78%;background:var(--blue)}
-  .plate.l2{width:60%;background:var(--blue-soft);margin-top:-6px;transform:translateY(-6px)}
-  .plate.l3{width:42%;background:linear-gradient(90deg,var(--blue-soft),var(--teal));margin-top:-6px;transform:translateY(-12px)}
-  .glasscard .cap{margin-top:22px;text-align:center;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-  .float-chip{position:absolute;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--fg);
-    border:1px solid var(--line-strong);border-radius:999px;padding:6px 12px;background:color-mix(in srgb,var(--card) 80%,transparent)}
-  .chip-a{top:16px;right:18px}
-  .chip-b{bottom:18px;left:16px}
-  section{padding:clamp(56px,8vw,90px) 0}
-  .sec-head{display:flex;flex-direction:column;gap:12px;max-width:60ch;margin-bottom:40px}
-  .sec-head h2{font-size:clamp(26px,4vw,38px)}
-  .sec-head p{color:var(--muted);font-size:16px}
-  /* Retícula asimétrica en vez de cuatro columnas idénticas: la primera tarjeta ocupa el
-     doble de ancho y hace de ancla visual. Cuatro cajas iguales en fila es el layout más
-     visto y no jerarquiza nada: aquí "sitios web" es el servicio de entrada. */
-  .cards{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
-  .card:nth-child(1){grid-column:span 4}
-  .card:nth-child(2){grid-column:span 2}
-  .card:nth-child(3){grid-column:span 3}
-  .card:nth-child(4){grid-column:span 3}
-  @media (max-width:900px){
-    .cards{grid-template-columns:repeat(2,1fr)}
-    .card:nth-child(1){grid-column:span 2}
-    .card:nth-child(2),.card:nth-child(3),.card:nth-child(4){grid-column:span 1}
+
+  /* Proceso: tres columnas separadas por reglas verticales, sin cajas. */
+  .etapas{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--linea)}
+  .etapa{padding:clamp(24px,3.4vw,38px) clamp(18px,2.4vw,32px);border-right:1px solid var(--linea)}
+  .etapa:last-child{border-right:0}
+  .etapa .n{font-family:var(--serif);font-size:clamp(44px,6vw,76px);line-height:1;color:var(--linea);
+    display:block;margin-bottom:14px}
+  .etapa h3{font-family:var(--serif);font-size:23px;margin-bottom:8px;letter-spacing:-.01em}
+  .etapa p{color:var(--tinta-2);font-size:15.5px}
+  @media (max-width:760px){
+    .etapas{grid-template-columns:1fr}
+    .etapa{border-right:0;border-bottom:1px solid var(--linea)}
+    .etapa:last-child{border-bottom:0}
   }
-  @media (max-width:520px){
-    .cards{grid-template-columns:1fr}
-    .card:nth-child(n){grid-column:span 1}
-  }
-  .card{position:relative;border:1px solid var(--line);border-radius:var(--radius);
-    background:var(--card);padding:26px 24px;display:flex;flex-direction:column;gap:12px;
-    overflow:hidden;transition:border-color .25s,transform .25s cubic-bezier(.4,0,.2,1),box-shadow .25s}
-  /* Halo que se enciende bajo el cursor: da profundidad sin recurrir a otra sombra dura. */
-  .card::before{content:"";position:absolute;inset:-1px;border-radius:inherit;opacity:0;
-    transition:opacity .3s;pointer-events:none;
-    background:radial-gradient(420px 200px at var(--mx,50%) var(--my,0%),rgba(47,107,255,.14),transparent 70%)}
-  .card:hover{border-color:var(--line-strong);transform:translateY(-5px);box-shadow:var(--shadow-md)}
-  .card:hover::before{opacity:1}
-  .card .ic{width:44px;height:44px;border-radius:12px;background:var(--surface-2);border:1px solid var(--line);
-    display:flex;align-items:center;justify-content:center;color:var(--teal);
-    transition:transform .25s cubic-bezier(.34,1.56,.64,1),color .25s}
-  .card:hover .ic{transform:translateY(-2px) rotate(-4deg)}
-  .card h3{font-size:17.5px;font-weight:600;letter-spacing:-.015em}
-  .card p{font-size:14px;color:var(--muted);max-width:44ch}
-  .process{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
-  @media (max-width:820px){.process{grid-template-columns:1fr;gap:30px}}
-  .steps{display:flex;flex-direction:column;gap:14px}
-  .step{display:flex;gap:16px;border:1px solid var(--line);border-radius:14px;background:var(--card);padding:18px 20px}
-  .step .num{font-family:var(--mono);font-weight:700;color:var(--blue-soft);font-size:14px;flex:none;width:34px;height:34px;
-    border-radius:9px;background:var(--surface-2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
-  .step h3{font-size:16px;font-weight:700}
-  .step p{font-size:13.6px;color:var(--muted);margin-top:3px}
-  .stackviz{border:1px solid var(--line-strong);border-radius:22px;background:linear-gradient(180deg,var(--surface),var(--surface-2));
-    padding:40px;display:flex;align-items:center;justify-content:center}
-  .cta-band{border:1px solid var(--line-strong);border-radius:26px;overflow:hidden;position:relative;
-    background:linear-gradient(120deg,var(--surface),var(--surface-2));padding:clamp(34px,6vw,58px);text-align:center}
-  .cta-band::before{content:"";position:absolute;inset:0;z-index:0;
-    background:radial-gradient(520px 300px at 50% -20%,rgba(47,107,255,.22),transparent 60%)}
-  .cta-band>*{position:relative;z-index:1}
-  .cta-band h2{font-size:clamp(26px,4vw,40px)}
-  .cta-band p{color:var(--muted);margin:14px auto 26px;max-width:46ch;font-size:16px}
-  .cta-band .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-  footer{border-top:1px solid var(--line);padding:40px 0}
-  .foot-in{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
-  .foot-links{display:flex;gap:20px;color:var(--muted);font-size:14px;flex-wrap:wrap}
-  .foot-links a:hover{color:var(--fg)}
-  .foot-small{color:var(--muted-2);font-size:12.5px;font-family:var(--mono)}
+
+  /* Cierre: una frase grande y un correo. Sin banda de color, sin botón relleno. */
+  .cierre{padding:clamp(56px,9vw,116px) 0;border-top:1px solid var(--linea)}
+  .cierre h2{font-family:var(--serif);font-size:clamp(34px,6.6vw,74px);line-height:1;
+    letter-spacing:-.03em;max-width:16ch}
+  .cierre h2 em{font-style:italic;color:var(--acento)}
+  .correo{display:inline-block;margin-top:clamp(24px,4vw,44px);font-family:var(--serif);
+    font-size:clamp(21px,3.4vw,36px);border-bottom:2px solid var(--acento);padding-bottom:4px;
+    transition:opacity .2s}
+  .correo:hover{opacity:.62}
+  .pie{border-top:1px solid var(--linea);padding:26px 0 40px;display:flex;justify-content:space-between;
+    gap:20px;flex-wrap:wrap;font-size:14px;color:var(--tinta-2)}
+  .pie a:hover{color:var(--tinta)}
 </style>
 </head>
 <body>
 <a class="skip" href="#top">Saltar al contenido</a>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <g id="mark">
-      <rect x="16" y="60" width="68" height="15" rx="4.5" fill="var(--blue)"/>
-      <rect x="24" y="42" width="52" height="15" rx="4.5" fill="var(--blue-soft)"/>
-      <rect x="32" y="24" width="36" height="15" rx="4.5" fill="var(--teal)"/>
-    </g>
-  </defs>
-</svg>
 
-<nav>
-  <div class="wrap nav-in">
-    <a class="brand" href="#top" aria-label="Plataformas Web Chile inicio">
-      <svg width="30" height="30" viewBox="0 0 100 100"><use href="#mark"/></svg>
-      <span class="wm">Plataformas<span class="thin"> Web</span></span>
-    </a>
-    <div class="nav-links">
+<header class="top">
+  <div class="wrap top-in">
+    <a class="marca" href="#top">Plataformas Web <i>Chile</i></a>
+    <nav class="top-nav">
       <a href="#servicios">Servicios</a>
       <a href="#proceso">Cómo trabajamos</a>
       <a href="#contacto">Contacto</a>
-    </div>
-    <a class="btn btn-primary" href="#contacto">Cotizar proyecto</a>
-  </div>
-</nav>
-
-<header class="hero" id="top">
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <span class="eyebrow">Desarrollo &amp; asesorías web · Chile</span>
-      <h1>Construimos la <span class="accent">plataforma web</span> que tu negocio necesita.</h1>
-      <p class="lead">Sitios, tiendas online y sistemas a medida. Del diseño al deploy — capa por capa, con tecnología moderna y foco en resultados.</p>
-      <div class="hero-cta">
-        <a class="btn btn-primary" href="#contacto">Iniciar un proyecto</a>
-        <a class="btn btn-ghost" href="#servicios">Ver servicios</a>
-      </div>
-      <div class="hero-meta">
-        <span><b>Web a medida</b> · React / FastAPI</span>
-        <span><b>E-commerce</b> · pagos &amp; despacho</span>
-        <span><b>Asesoría</b> técnica</span>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="glasscard">
-        <span class="float-chip chip-a">deploy ✓</span>
-        <span class="float-chip chip-b">100% responsivo</span>
-        <div class="layers">
-          <div class="plate l1"></div>
-          <div class="plate l2"></div>
-          <div class="plate l3"></div>
-        </div>
-        <div class="cap">tu plataforma, capa por capa</div>
-      </div>
-    </div>
+    </nav>
   </div>
 </header>
 
 <main>
-<section id="servicios">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">Servicios</span>
-      <h2>Todo lo que tu presencia digital necesita</h2>
-      <p>Soluciones especializadas para PyMEs y empresas que quieren vender y operar mejor en internet.</p>
-    </div>
-    <div class="cards">
-      <div class="card reveal">
-        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M8 21h8"/></svg></div>
-        <h3>Sitios web a medida</h3>
-        <p>Landing pages y sitios corporativos rápidos, modernos y optimizados para Google.</p>
-      </div>
-      <div class="card reveal">
-        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.5 12.5H19L21 7H6"/></svg></div>
-        <h3>Tiendas online</h3>
-        <p>E-commerce con pasarela de pago, despacho y catálogo. Listo para vender.</p>
-      </div>
-      <div class="card reveal">
-        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6l-6 6 6 6M16 6l6 6-6 6"/></svg></div>
-        <h3>Sistemas a medida</h3>
-        <p>Plataformas y automatizaciones para tu operación: pedidos, stock, clientes.</p>
-      </div>
-      <div class="card reveal">
-        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6 6l2 2M16 16l2 2"/><circle cx="12" cy="12" r="3.2"/></svg></div>
-        <h3>Asesoría técnica</h3>
-        <p>Te acompañamos en decisiones de tecnología, hosting, SEO y crecimiento.</p>
-      </div>
-    </div>
+<section class="hero wrap" id="top">
+  <h1>Construimos la plataforma que tu negocio <em>necesita</em>.</h1>
+  <div class="hero-bajo">
+    <p>Sitios, tiendas online y sistemas a medida para PyMEs chilenas. Del diseño al deploy, con tecnología moderna y foco en resultados.</p>
+    <a class="enlace-flecha" href="#contacto">Conversemos <span aria-hidden="true">→</span></a>
   </div>
 </section>
 
-<section id="proceso">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">Cómo trabajamos</span>
-      <h2>Tu proyecto, capa por capa</h2>
-      <p>Un proceso claro y por etapas: sabes qué esperar y ves avances reales en cada paso.</p>
-    </div>
-    <div class="process">
-      <div class="steps">
-        <div class="step reveal"><span class="num">01</span><div><h3>Base · Descubrimiento</h3><p>Entendemos tu negocio, objetivos y alcance. Definimos qué construir y por qué.</p></div></div>
-        <div class="step reveal"><span class="num">02</span><div><h3>Estructura · Diseño &amp; desarrollo</h3><p>Diseñamos e implementamos la plataforma con tecnología moderna y buenas prácticas.</p></div></div>
-        <div class="step reveal"><span class="num">03</span><div><h3>Lanzamiento · Deploy &amp; soporte</h3><p>Publicamos, medimos y te acompañamos para que la plataforma siga creciendo.</p></div></div>
-      </div>
-      <div class="stackviz reveal">
-        <svg width="180" height="180" viewBox="0 0 100 100" aria-hidden="true"><use href="#mark"/></svg>
-      </div>
-    </div>
+<section class="seccion wrap" id="servicios">
+  <div class="rotulo">Servicios</div>
+  <div class="indice">
+    <article class="fila">
+      <span class="n">01</span>
+      <h3>Sitios web a medida</h3>
+      <p>Landing pages y sitios corporativos rápidos, modernos y optimizados para Google.</p>
+    </article>
+    <article class="fila">
+      <span class="n">02</span>
+      <h3>Tiendas online</h3>
+      <p>E-commerce con pasarela de pago, despacho y catálogo. Listo para vender.</p>
+    </article>
+    <article class="fila">
+      <span class="n">03</span>
+      <h3>Sistemas a medida</h3>
+      <p>Plataformas y automatizaciones para tu operación: pedidos, stock, clientes.</p>
+    </article>
+    <article class="fila">
+      <span class="n">04</span>
+      <h3>Asesoría técnica</h3>
+      <p>Te acompañamos en decisiones de tecnología, hosting, SEO y crecimiento.</p>
+    </article>
   </div>
 </section>
 
-<section id="contacto">
-  <div class="wrap">
-    <div class="cta-band reveal">
-      <span class="eyebrow">Hablemos</span>
-      <h2>¿Listo para tu próxima plataforma?</h2>
-      <p>Cuéntanos qué necesitas y te preparamos una propuesta a medida, sin compromiso.</p>
-      <div class="row">
-        <a class="btn btn-primary" href="mailto:plataformasweb.chile@gmail.com?subject=Quiero%20cotizar%20un%20proyecto%20web">Escribir por correo</a>
-        <a class="btn btn-ghost" href="https://instagram.com/plataformasweb.chile" target="_blank" rel="noopener">@plataformasweb.chile</a>
-      </div>
-    </div>
+<section class="seccion wrap" id="proceso">
+  <div class="rotulo">Cómo trabajamos</div>
+  <div class="etapas">
+    <article class="etapa">
+      <span class="n">01</span>
+      <h3>Descubrimiento</h3>
+      <p>Entendemos tu negocio, objetivos y alcance. Definimos qué construir y por qué.</p>
+    </article>
+    <article class="etapa">
+      <span class="n">02</span>
+      <h3>Diseño y desarrollo</h3>
+      <p>Diseñamos e implementamos la plataforma con tecnología moderna y buenas prácticas.</p>
+    </article>
+    <article class="etapa">
+      <span class="n">03</span>
+      <h3>Deploy y soporte</h3>
+      <p>Publicamos, medimos y te acompañamos para que la plataforma siga creciendo.</p>
+    </article>
   </div>
+</section>
+
+<section class="cierre wrap" id="contacto">
+  <h2>Cuéntanos qué necesitas y te preparamos una <em>propuesta</em>.</h2>
+  <a class="correo" href="mailto:plataformasweb.chile@gmail.com?subject=Quiero%20cotizar%20un%20proyecto%20web">plataformasweb.chile@gmail.com</a>
 </section>
 </main>
 
-<footer>
-  <div class="wrap foot-in">
-    <a class="brand" href="#top">
-      <svg width="26" height="26" viewBox="0 0 100 100"><use href="#mark"/></svg>
-      <span class="wm">Plataformas<span class="thin"> Web Chile</span></span>
-    </a>
-    <div class="foot-links">
-      <a href="#servicios">Servicios</a>
-      <a href="#proceso">Cómo trabajamos</a>
-      <a href="mailto:plataformasweb.chile@gmail.com">Correo</a>
-      <a href="https://instagram.com/plataformasweb.chile" target="_blank" rel="noopener">Instagram</a>
-    </div>
-    <span class="foot-small">© 2026 Plataformas Web Chile</span>
-  </div>
+<footer class="wrap pie">
+  <span>© 2026 Plataformas Web Chile</span>
+  <a href="https://instagram.com/plataformasweb.chile" target="_blank" rel="noopener">Instagram ↗</a>
 </footer>
 
-<script>
-(function () {
-  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // 1. Entrada escalonada. Los elementos aparecen al entrar en pantalla, con un retardo
-  //    por grupo para que caigan en cascada y no todos de golpe.
-  var animables = document.querySelectorAll('.reveal');
-  if (reduce || !('IntersectionObserver' in window)) {
-    animables.forEach(function (el) { el.classList.add('in'); });
-  } else {
-    var io = new IntersectionObserver(function (entradas) {
-      entradas.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        var hermanos = Array.prototype.slice.call(e.target.parentNode.children);
-        e.target.style.transitionDelay = Math.min(hermanos.indexOf(e.target), 5) * 80 + 'ms';
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px' });
-    animables.forEach(function (el) { io.observe(el); });
-  }
-
-  // 2. Sección visible marcada en la barra de navegación.
-  var enlaces = document.querySelectorAll('.nav-links a[href^="#"]');
-  var secciones = [];
-  enlaces.forEach(function (a) {
-    var s = document.querySelector(a.getAttribute('href'));
-    if (s) secciones.push({ enlace: a, seccion: s });
-  });
-  if (secciones.length && 'IntersectionObserver' in window) {
-    var spy = new IntersectionObserver(function (entradas) {
-      entradas.forEach(function (e) {
-        var par = secciones.find(function (x) { return x.seccion === e.target; });
-        if (par && e.isIntersecting) {
-          enlaces.forEach(function (a) { a.removeAttribute('aria-current'); });
-          par.enlace.setAttribute('aria-current', 'true');
-        }
-      });
-    }, { rootMargin: '-45% 0px -50%' });
-    secciones.forEach(function (x) { spy.observe(x.seccion); });
-  }
-
-  // 3. Halo de las tarjetas siguiendo al cursor (solo con puntero fino: en táctil sobra).
-  if (!reduce && matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    document.querySelectorAll('.card').forEach(function (card) {
-      card.addEventListener('pointermove', function (ev) {
-        var r = card.getBoundingClientRect();
-        card.style.setProperty('--mx', (ev.clientX - r.left) + 'px');
-        card.style.setProperty('--my', (ev.clientY - r.top) + 'px');
-      });
-    });
-  }
-})();
-</script>
 </body>
 </html>
