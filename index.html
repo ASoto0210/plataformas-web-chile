@@ -19,8 +19,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://asoto0210.github.io/plataformas-web-chile/og-image.png">
 <!-- Color de la barra del navegador movil, ajustado al papel/tinta de esta version. -->
-<meta name="theme-color" content="#F4F1EA" media="(prefers-color-scheme:light)">
-<meta name="theme-color" content="#111214" media="(prefers-color-scheme:dark)">
+<meta name="theme-color" content="#F4F1EA">
+<meta name="color-scheme" content="light">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,10 +38,9 @@
     --sans:"Instrument Sans","Segoe UI",system-ui,sans-serif;
     --maxw:1180px;
   }
-  @media (prefers-color-scheme:dark){
-    :root{--papel:#111214;--tinta:#EDEAE3;--tinta-2:#989DA6;
-      --linea:#2A2D33;--acento:#6E8CFF}
-  }
+  /* Sin variante oscura a proposito: el papel hueso y la tinta SON la identidad de la
+     marca. Respetar el tema del sistema hacia que la mitad de las visitas vieran una
+     version que no es la elegida. */
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{margin:0;background:var(--papel);color:var(--tinta);font-family:var(--sans);
