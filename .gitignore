@@ -1,0 +1,4 @@
+# Residuos de intentos de conversión SVG->PNG y archivos temporales
+_wrap.html
+png/_err.txt
+*.tmp

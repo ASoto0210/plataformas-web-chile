@@ -1,1 +1,0 @@
-[0720/200850.333:ERROR:chrome\app\chrome_main.cc:314] Multiple targets are not supported in headless mode.
