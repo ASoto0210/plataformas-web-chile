@@ -21,7 +21,7 @@ directamente o con `python -m http.server` desde la raíz.
 | Contacto | `#contacto` |
 
 **Contacto:** WhatsApp +56 9 9991 8241 (acción principal), correo
-`plataformasweb.chile@gmail.com`, Instagram [@plataformasweb.chile](https://instagram.com/plataformasweb.chile).
+`plataformasweb.chile@gmail.com`, Instagram [@plataformasweb.cl](https://instagram.com/plataformasweb.cl).
 
 ### Decisiones que conviene no deshacer sin querer
 
