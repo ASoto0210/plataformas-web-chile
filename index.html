@@ -107,7 +107,12 @@
     .datos > div + div{border-left:0;border-top:1px solid var(--linea);padding-left:0}}
 
   .seccion{padding-block:clamp(54px,10vh,108px)}
-  .rotulo{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+  /* Rotulo de seccion. Es un h2 de verdad para que el indice de encabezados no salte
+     de h1 a h3: un lector de pantalla navega por encabezados y asi encuentra las
+     secciones. Se fijan peso y interlineado porque la regla h2 de abajo impondria
+     700/1.08 y cambiaria el aspecto. */
+  .rotulo{font-family:var(--mono);font-size:11.5px;font-weight:400;line-height:1.55;
+    letter-spacing:.16em;text-transform:uppercase;
     color:var(--gris);margin:0 0 30px}
   h2{font-size:clamp(26px,3.4vw,42px);font-weight:700;letter-spacing:-.03em;line-height:1.08;margin:0}
 
@@ -191,7 +196,7 @@
 </section>
 
 <section class="env seccion" id="servicios">
-  <p class="rotulo">Servicios</p>
+  <h2 class="rotulo">Servicios</h2>
   <div class="servicios">
     <article class="srv"><h3>Sitios web a medida</h3><p>Landing pages y sitios corporativos rápidos, modernos y optimizados para Google.</p></article>
     <article class="srv"><h3>Tiendas online</h3><p>E-commerce con pasarela de pago, despacho y catálogo.</p></article>
@@ -201,7 +206,7 @@
 </section>
 
 <section class="env seccion" id="trabajos">
-  <p class="rotulo">Trabajos</p>
+  <h2 class="rotulo">Trabajos</h2>
   <article class="caso">
     <div class="caso-cab">
       <p class="caso-sector">Repuestos diésel · Santiago</p>
@@ -231,7 +236,7 @@
 </section>
 
 <section class="env seccion" id="proceso">
-  <p class="rotulo">Cómo trabajamos</p>
+  <h2 class="rotulo">Cómo trabajamos</h2>
   <div class="etapa"><span class="n">ETAPA 01</span><div><h3>Descubrimiento</h3><p>Entendemos tu negocio, objetivos y alcance. Definimos qué construir y por qué.</p></div></div>
   <div class="etapa"><span class="n">ETAPA 02</span><div><h3>Diseño y desarrollo</h3><p>Diseñamos e implementamos la plataforma con tecnología moderna y buenas prácticas.</p></div></div>
   <div class="etapa"><span class="n">ETAPA 03</span><div><h3>Deploy y soporte</h3><p>Publicamos, medimos y te acompañamos para que la plataforma siga creciendo.</p></div></div>
