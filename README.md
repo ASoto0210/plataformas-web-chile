@@ -85,6 +85,18 @@ Dirección elegida: **Capas** — tres planos que ascienden, una plataforma que 
 sistema (Segoe UI / Consolas). Para imprenta conviene convertirlo a trazos, si no se ve
 distinto en cada equipo. El símbolo ya es geométrico y no depende de fuentes.
 
+## ⏸ Pendiente con fecha: el lunes 31-08-2026 a las 15:00
+
+El caso de STOM tiene **el enlace a `stom.cl` en pausa**: hasta esa hora el dominio sigue
+mostrando el WordPress viejo, que es justo lo que el titular de esta página promete
+reemplazar. En `index.html`, en el `caso-pie`, hay un comentario con la línea exacta que hay
+que restaurar apenas se haga el corte.
+
+No se puso una clave de acceso porque **en GitHub Pages no existe**: es hosting estático y el
+HTML se entrega completo a quien lo pida, así que cualquier clave en JavaScript es decorativa.
+Y apagar Pages tampoco servía: **el pie de `stom.cl` enlaza a este sitio** (`Footer.jsx`), así
+que dejarlo caído rompería el crédito en el sitio del cliente.
+
 ## Cambio de dominio
 
 Cuando `plataformasweb.cl` tenga delegación:
