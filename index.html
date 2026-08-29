@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Plataformas Web Chile — Desarrollo y asesorías web</title>
 <meta name="description" content="Desarrollo de sitios, tiendas online y sistemas a medida en Chile. Del diseño al deploy.">
-<meta name="color-scheme" content="light">
+<meta name="color-scheme" content="dark">
 <meta property="og:title" content="Plataformas Web Chile — Desarrollo y asesorías web">
 <meta property="og:description" content="Sitios, tiendas online y sistemas a medida. Del diseño al deploy.">
 <meta property="og:type" content="website">
@@ -19,313 +19,235 @@
 <link rel="canonical" href="https://asoto0210.github.io/plataformas-web-chile/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://asoto0210.github.io/plataformas-web-chile/og-image.png">
-<meta name="theme-color" content="#F2EEE6">
+<meta name="theme-color" content="#100E0B">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <!-- Fuentes servidas desde este mismo sitio: con Google Fonts basta una extension de
      privacidad o una red que bloquee el dominio para que la pagina pierda su tipografia. -->
-<!-- El h1 es lo mas grande sobre el pliegue y usa las dos variantes de la serif:
-     sin precargarlas se ve un instante en Georgia y salta. -->
-<link rel="preload" href="fuentes/instrument-serif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fuentes/instrument-serif-400-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
+<!-- El h1 va en Archivo 700 y es lo mas grande sobre el pliegue; los titulos de
+     seccion y los botones usan la 600. Sin precargarlas se ven un instante en la
+     fuente del sistema y saltan. -->
+<link rel="preload" href="fuentes/archivo-700-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fuentes/archivo-600-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fuentes/fuentes-v4.css">
 <style>
-  /* ═══ V4 · ESTUDIO ═════════════════════════════════════════════════════════
-     Sin serif y sin titulares gigantes. La personalidad viene de la ESTRUCTURA:
-     una columna izquierda fija con la marca y el índice, y el contenido
-     desplazándose a la derecha —como el sitio de un estudio de diseño—. Grotesca
-     ancha, mono para los datos, un solo acento y bloques de color plano.      */
   :root{
-    /* Crema calido de base, panel lateral un tono mas oscuro para separarlo, y las
-       celdas de servicio mas claras que el fondo: el papel deja de ser plano. */
-    --papel:#F2EEE6; --panel:#E9E3D8; --celda:#FAF8F3;
-    --tinta:#161A18; --gris:#5F625F; --linea:#DAD3C6;
-    --acento:#0F3D2E;        /* verde profundo: serio, no el azul de siempre */
-    --acento-claro:#DFE8E0;
+    /* Fondo casi negro, nunca #000. Superficie visiblemente distinta del fondo. */
+    --fondo:#100E0B; --sup:#181510; --sup-alta:#211C15;
+    --linea:rgba(255,255,255,.10); --linea-fuerte:rgba(255,255,255,.20);
+    --tinta:#EFEBE3; --gris:#9A9489;
+    /* Negro CALIDO, no carbon neutro: el gris azulado es el tono mas visto en la
+       categoria. Este continua la identidad de papel hueso, invertida. El acento
+       es hueso y el bronce queda solo para las cifras: nada de verde acido sobre
+       negro, que es de los clises mas reconocibles del diseno generado. */
+    --hueso:#E4DCCB; --dato:#C9AF82;
     --sans:"Archivo","Segoe UI",system-ui,sans-serif;
-    /* La display es serif y solo aparece en el titular y el cierre: el contraste
-       con la grotesca es lo que le da voz a la pagina. */
-    --display:"Instrument Serif",Georgia,"Times New Roman",serif;
     --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
-    --col:340px;
+    --r-sm:6px; --r:12px; --r-lg:14px;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;background:var(--papel);color:var(--tinta);font-family:var(--sans);
-    font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  body{margin:0;background:var(--fondo);color:var(--tinta);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;line-height:1.55}
   a{color:inherit;text-decoration:none}
-  a:focus-visible{outline:2px solid var(--acento);outline-offset:3px}
-  h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.025em;line-height:1.12;text-wrap:balance}
-  p{margin:0}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--hueso);outline-offset:3px;border-radius:2px}
+  .env{max-width:1180px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
+  h1,h2,h3{text-wrap:balance}
 
-  /* Estructura de dos columnas: la izquierda queda fija mientras el resto sube. */
-  .maqueta{display:grid;grid-template-columns:var(--col) minmax(0,1fr);gap:0;min-height:100vh}
-  .panel{position:sticky;top:0;height:100vh;padding:38px 34px;border-right:1px solid var(--linea);
-    background:var(--panel);
-    display:flex;flex-direction:column;justify-content:space-between}
-  .contenido{padding:38px clamp(24px,4vw,64px) 0}
-  @media (max-width:900px){
-    .maqueta{grid-template-columns:1fr}
-    .panel{position:static;height:auto;border-right:0;border-bottom:1px solid var(--linea);
-      background:var(--panel);
-      padding:26px 24px;gap:26px}
-    .contenido{padding:30px 24px 0}
-  }
-
-  .marca{display:flex;align-items:center;gap:11px;font-weight:700;font-size:17px;letter-spacing:-.02em}
-  .marca .capas{display:flex;flex-direction:column;gap:2px}
-  .marca .capas i{display:block;height:3px;border-radius:2px;background:var(--acento)}
-  .marca .capas i:nth-child(1){width:20px}
-  .marca .capas i:nth-child(2){width:14px;margin-left:3px}
-  .marca .capas i:nth-child(3){width:8px;margin-left:6px}
-  .panel-nav{display:flex;flex-direction:column;gap:9px;margin-top:34px;font-size:15px}
-  .panel-nav a{color:var(--gris);display:flex;align-items:baseline;gap:10px;transition:color .2s}
-  /* El numero va en el acento como todos los rotulos mono de la pagina. En el gris
-     de linea daba 1.17:1 contra el panel: era un indice que nadie podia leer. */
-  .panel-nav a::before{content:attr(data-n);font-family:var(--mono);font-size:11px;color:var(--acento)}
-  .panel-nav a:hover{color:var(--tinta)}
-  .panel-pie{font-family:var(--mono);font-size:11.5px;color:var(--gris);line-height:1.9}
-  .panel-pie a{border-bottom:1px solid var(--linea)}
-  .panel-pie a:hover{border-color:var(--tinta)}
-  @media (max-width:900px){.panel-nav{flex-direction:row;flex-wrap:wrap;gap:16px;margin-top:0}
-    /* En el telefono los enlaces median 24px de alto: por debajo del minimo
-       de 44px, y son la navegacion principal. */
-    .panel-nav a{min-height:44px;align-items:center}
-    .panel-pie{display:none}}
-
-  /* La medida se limita en CADA elemento, no en el contenedor: puesta en .intro
-     estrangulaba tambien al parrafo y a los botones. */
-  .intro{padding:clamp(30px,7vh,90px) 0 clamp(34px,6vh,72px)}
-  .intro h1{font-family:var(--display);font-weight:400;font-size:clamp(40px,5.6vw,74px);
-    line-height:1.02;letter-spacing:-.015em;max-width:17ch}
-  /* La italica de Instrument Serif marca el destino que se vende. Es el unico
-     enfasis del titular: si se acentua mas de una cosa, no se acentua ninguna. */
-  .intro h1 em{font-style:italic}
-  .intro p{margin-top:20px;color:var(--gris);font-size:17px;max-width:48ch}
-  .intro .acciones{display:flex;gap:14px;margin-top:28px;flex-wrap:wrap;align-items:center}
-  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--acento);color:#fff;
-    padding:12px 20px;border-radius:4px;font-weight:500;font-size:15px;
-    transition:transform .16s cubic-bezier(.4,0,.2,1),opacity .16s}
-  .btn:hover{transform:translateY(-2px);opacity:.92}
-  .btn:active{transform:translateY(1px)}
-  /* El secundario es un enlace, no un segundo boton: dos botones del mismo peso
-     compiten entre si y no dicen cual es la accion principal. */
-  .enlace{font-size:15px;color:var(--tinta);border-bottom:1px solid var(--linea);
-    padding-bottom:2px;transition:border-color .2s}
-  .enlace:hover{border-color:var(--tinta)}
-  /* El area de toque se agranda con un pseudo-elemento y no con padding:
-     el subrayado es un border-bottom y con padding se despegaria del texto. */
-  .marca,.enlace,.caso-link{position:relative}
-  .marca::after,.enlace::after,.caso-link::after{content:'';position:absolute;
-    left:0;right:0;top:50%;transform:translateY(-50%);height:44px}
-  .enlace-claro{color:#F2EEE6;border-bottom-color:rgba(242,238,230,.4)}
-  .enlace-claro:hover{border-color:#F2EEE6}
-
-  .bloque{padding:clamp(34px,6vh,66px) 0;border-top:1px solid var(--linea)}
-  .bloque-rotulo{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--gris);margin-bottom:26px}
-
-  /* Caso: la prueba de que lo de arriba existe. Ocupa el ancho completo y se lee
-     de corrido —problema, solucion, cifras— porque un portafolio en miniaturas
-     obliga a hacer clic para entender, y aqui el argumento es la historia. */
-  .caso{border:1px solid var(--linea);background:var(--celda)}
-  .caso-cab{padding:clamp(22px,2.6vw,32px);border-bottom:1px solid var(--linea)}
-  .caso-sector{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--acento);display:block;margin-bottom:12px}
-  .caso-cab h3{font-size:clamp(21px,2.4vw,27px);margin-bottom:10px}
-  .caso-linea{color:var(--gris);font-size:16px;max-width:56ch}
-  .caso-cuerpo{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--linea)}
-  .caso-col{background:var(--celda);padding:clamp(20px,2.4vw,30px)}
-  .caso-col h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--gris);font-weight:400;margin:0 0 14px}
-  .caso-col p{color:var(--gris);font-size:15px;max-width:44ch}
-  .caso-col ul{margin:0;padding-left:18px;color:var(--gris);font-size:15px;max-width:44ch}
-  .caso-col li+li{margin-top:9px}
-  .caso-col li strong{color:var(--tinta);font-weight:600}
-  .caso-datos{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--linea);
-    border-top:1px solid var(--linea);margin:0}
-  .caso-datos > div{background:var(--acento-claro);padding:clamp(18px,2.2vw,26px)}
-  .caso-datos dt{font-family:var(--mono);font-size:clamp(24px,3vw,32px);color:var(--acento);
-    line-height:1;font-variant-numeric:tabular-nums}
-  .caso-datos dd{margin:9px 0 0;font-size:13.5px;color:var(--gris);max-width:30ch}
-  .caso-pie{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;
-    padding:clamp(18px,2.2vw,26px);border-top:1px solid var(--linea)}
-  .caso-link{font-family:var(--mono);font-size:13px;color:var(--acento);
-    border-bottom:1px solid var(--acento);padding-bottom:2px}
-  .caso-nota{font-size:13px;color:var(--gris)}
+  .barra{position:sticky;top:0;z-index:20;background:rgba(16,14,11,.74);
+    backdrop-filter:blur(12px);border-bottom:1px solid var(--linea)}
+  .barra .env{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .marca{position:relative;display:flex;align-items:center;gap:10px;font-weight:600;
+    letter-spacing:-.02em}
+  /* Area de toque por pseudo-elemento: con padding se moveria la barra entera. */
+  .marca::after{content:"";position:absolute;left:0;right:0;top:50%;
+    transform:translateY(-50%);height:44px}
+  .capas{display:flex;flex-direction:column;gap:2px}
+  .capas i{display:block;height:2px;border-radius:2px;background:var(--hueso)}
+  .capas i:nth-child(1){width:18px}.capas i:nth-child(2){width:12px;margin-left:3px}
+  .capas i:nth-child(3){width:7px;margin-left:5px}
+  .barra nav{display:flex;gap:24px;font-size:14px;color:var(--gris)}
+  .barra nav a{min-height:44px;display:flex;align-items:center;transition:color .15s}
+  .barra nav a:hover{color:var(--tinta)}
+  /* En telefono la barra se apila: el menu NO se esconde. Ocultarlo sin poner
+     una hamburguesa deja el sitio sin navegacion en el dispositivo donde mas
+     se navega. */
   @media (max-width:760px){
-    .caso-cuerpo{grid-template-columns:1fr}
-    .caso-datos{grid-template-columns:1fr}
+    .barra .env{flex-direction:column;align-items:flex-start;height:auto;
+      gap:4px;padding-top:14px;padding-bottom:6px}
+    .barra nav{flex-wrap:wrap;gap:6px 20px;width:100%}
   }
 
-  /* Servicios: dos columnas de fichas planas, sin borde ni sombra, con el numero
-     en mono arriba. Al pasar el cursor se tiñe de acento claro. */
-  .servicios{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--linea);
-    border:1px solid var(--linea)}
-  .servicio{background:var(--celda);padding:clamp(20px,2.4vw,30px);transition:background .2s}
-  .servicio:hover{background:var(--acento-claro)}
-  .servicio h3{font-size:20px;margin-bottom:8px}
-  .servicio p{color:var(--gris);font-size:15px;max-width:38ch}
-  @media (max-width:620px){.servicios{grid-template-columns:1fr}}
+  /* padding-block y NO el atajo 'padding: X 0': estos elementos tambien llevan
+     .env, y el atajo le pone el padding lateral en 0. En escritorio el centrado
+     del max-width lo disimula; en telefono el texto queda pegado al borde. */
+  .hero{padding-block:clamp(60px,12vh,140px) clamp(36px,6vh,72px)}
+  .hero h1{font-size:clamp(38px,7vw,86px);font-weight:700;letter-spacing:-.042em;
+    line-height:.99;margin:0;max-width:16ch}
+  .hero h1 em{font-style:normal;color:var(--gris)}
+  .hero p{margin:26px 0 0;color:var(--gris);font-size:clamp(16px,1.6vw,19px);max-width:56ch}
 
-  /* Proceso: tabla de tres filas, con la etapa a la izquierda. */
-  .proceso{border-top:1px solid var(--linea)}
-  .etapa{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:22px 0;
+  .acciones{display:flex;gap:12px;align-items:center;margin-top:34px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;min-height:46px;padding:0 22px;border-radius:var(--r-sm);
+    background:var(--hueso);color:#100E0B;font-weight:600;font-size:15px;
+    transition:transform .16s cubic-bezier(.16,1,.3,1),opacity .16s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:active{transform:scale(.97)}
+  .btn-fantasma{background:none;color:var(--tinta);border:1px solid var(--linea-fuerte)}
+  .btn-fantasma:hover{border-color:var(--tinta);background:rgba(255,255,255,.05)}
+
+  /* La prueba antes que el discurso: las cifras del caso, arriba. */
+  .datos{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--linea);
+    border-bottom:1px solid var(--linea);margin:clamp(44px,8vh,88px) 0 0;padding:0}
+  .datos > div{padding:26px 0}
+  .datos > div + div{border-left:1px solid var(--linea);padding-left:28px}
+  .datos dt{font-family:var(--mono);font-size:clamp(26px,3.4vw,40px);color:var(--dato);
+    letter-spacing:-.03em;margin:0;font-variant-numeric:tabular-nums}
+  .datos dd{margin:8px 0 0;color:var(--gris);font-size:13.5px;max-width:26ch}
+  @media (max-width:760px){.datos{grid-template-columns:1fr}
+    .datos > div + div{border-left:0;border-top:1px solid var(--linea);padding-left:0}}
+
+  .seccion{padding-block:clamp(54px,10vh,108px)}
+  .rotulo{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--gris);margin:0 0 30px}
+  h2{font-size:clamp(26px,3.4vw,42px);font-weight:700;letter-spacing:-.03em;line-height:1.08;margin:0}
+
+  /* Cuatro servicios en retícula asimetrica 4/2 · 2/4: cuatro tarjetas iguales
+     en fila es exactamente lo que se espera, y por eso aburre. */
+  .servicios{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--linea);
+    border:1px solid var(--linea);border-radius:var(--r);overflow:hidden}
+  .srv{background:var(--sup);padding:clamp(22px,2.6vw,34px);transition:background .2s}
+  .srv:hover{background:var(--sup-alta)}
+  .srv:nth-child(1){grid-column:span 4}.srv:nth-child(2){grid-column:span 2}
+  .srv:nth-child(3){grid-column:span 2}.srv:nth-child(4){grid-column:span 4}
+  .srv h3{font-size:19px;margin:0 0 8px;font-weight:600;letter-spacing:-.012em}
+  .srv p{margin:0;color:var(--gris);font-size:14.5px;max-width:44ch}
+  @media (max-width:820px){.servicios{grid-template-columns:1fr}
+    .srv:nth-child(n){grid-column:auto}}
+
+  .caso{border:1px solid var(--linea);border-radius:var(--r-lg);overflow:hidden;background:var(--sup)}
+  .caso-cab{padding:clamp(26px,3.4vw,40px);border-bottom:1px solid var(--linea)}
+  .caso-sector{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--dato);margin:0 0 12px}
+  .caso-cab h3{font-size:clamp(22px,2.8vw,32px);margin:0 0 10px;font-weight:700;letter-spacing:-.028em}
+  .caso-cab p{margin:0;color:var(--gris);max-width:60ch}
+  .caso-cols{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--linea)}
+  .caso-col{background:var(--sup);padding:clamp(22px,2.8vw,34px)}
+  .caso-col h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--gris);margin:0 0 14px;font-weight:400}
+  .caso-col p{margin:0;color:var(--gris);font-size:14.5px}
+  .caso-col ul{margin:0;padding-left:18px;color:var(--gris);font-size:14.5px}
+  .caso-col li{margin-bottom:11px}
+  .caso-col li b{color:var(--tinta);font-weight:600}
+  .caso-pie{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
+    padding:18px clamp(22px,2.8vw,34px);border-top:1px solid var(--linea)}
+  .caso-pie a{position:relative;font-family:var(--mono);font-size:13px;color:var(--dato);
+    border-bottom:1px solid rgba(201,175,130,.42);transition:border-color .2s}
+  .caso-pie a:hover{border-color:var(--dato)}
+  .caso-pie a::after{content:"";position:absolute;left:0;right:0;top:50%;
+    transform:translateY(-50%);height:44px}
+  .caso-pie span{color:var(--gris);font-size:12.5px}
+  @media (max-width:760px){.caso-cols{grid-template-columns:1fr}}
+
+  /* Las etapas SI son una secuencia: aqui el numero informa. */
+  .etapa{display:grid;grid-template-columns:100px 1fr;gap:22px;padding:24px 0;
     border-bottom:1px solid var(--linea);align-items:start}
-  .etapa .fase{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
-    color:var(--acento);padding-top:3px}
-  .etapa h3{font-size:18px;margin-bottom:5px}
-  .etapa p{color:var(--gris);font-size:15px;max-width:56ch}
+  .etapa:first-of-type{border-top:1px solid var(--linea)}
+  .etapa .n{font-family:var(--mono);font-size:12px;color:var(--dato);padding-top:4px}
+  .etapa h3{font-size:18px;margin:0 0 5px;font-weight:600}
+  .etapa p{margin:0;color:var(--gris);font-size:14.5px;max-width:62ch}
   @media (max-width:620px){.etapa{grid-template-columns:1fr;gap:6px}}
 
-  /* El cierre es el unico bloque en color pleno: cierra la pagina y concentra la
-     atencion en el CTA. Va contenido y con radio, no a sangre, para que no parezca
-     una seccion pegada de otro sitio. */
-  .cierre{margin:clamp(30px,5vh,54px) 0 clamp(38px,7vh,74px);
-    padding:clamp(30px,4.6vw,56px);background:var(--acento);color:#F2EEE6;border-radius:10px}
-  .cierre h2{font-family:var(--display);font-weight:400;font-size:clamp(32px,4.2vw,56px);
-    line-height:1.05;letter-spacing:-.01em;max-width:18ch}
-  .cierre p{margin-top:14px;color:rgba(242,238,230,.72);max-width:48ch;font-size:16.5px}
-  .cierre .acciones{display:flex;gap:14px;margin-top:26px;flex-wrap:wrap}
-  .cierre .btn{background:#F2EEE6;color:var(--acento);font-weight:600}
-  /* Quien pide menos movimiento no deberia recibir ninguno. */
+  .cierre{border:1px solid var(--linea);border-radius:var(--r-lg);background:var(--sup);
+    padding:clamp(32px,5vw,64px)}
+  .cierre h2{max-width:18ch}
+  .cierre p{color:var(--gris);margin:14px 0 0;max-width:52ch}
+  .pie{border-top:1px solid var(--linea);padding-block:26px;color:var(--gris);font-size:13px;
+    display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:clamp(40px,7vh,80px)}
+
   @media (prefers-reduced-motion:reduce){
-    *,*::before,*::after{transition-duration:.01ms !important;
-      animation-duration:.01ms !important;animation-iteration-count:1 !important}
-    html{scroll-behavior:auto !important}
+    *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
+    html{scroll-behavior:auto!important}
   }
-</style>
-</head>
-<body>
+</style></head><body id="top">
 
-<div class="maqueta">
+<header class="barra"><div class="env">
+  <a class="marca" href="#top"><span class="capas" aria-hidden="true"><i></i><i></i><i></i></span>Plataformas Web Chile</a>
+  <nav><a href="#servicios">Servicios</a><a href="#trabajos">Trabajos</a><a href="#proceso">Cómo trabajamos</a><a href="#contacto">Contacto</a></nav>
+</div></header>
 
-  <aside class="panel">
-    <div>
-      <a class="marca" href="#top">
-        <span class="capas" aria-hidden="true"><i></i><i></i><i></i></span>
-        Plataformas Web Chile
-      </a>
-      <nav class="panel-nav">
-        <a href="#servicios" data-n="01">Servicios</a>
-        <a href="#trabajos" data-n="02">Trabajos</a>
-        <a href="#proceso" data-n="03">Cómo trabajamos</a>
-        <a href="#contacto" data-n="04">Contacto</a>
-      </nav>
+<main>
+<section class="env hero">
+  <h1>Del WordPress que te quedó chico <em>a una plataforma propia.</em></h1>
+  <p>Sitios, tiendas online y sistemas a medida para PyMEs chilenas. Del diseño al deploy, con tecnología moderna y foco en resultados.</p>
+  <div class="acciones">
+    <a class="btn" href="#contacto">Conversemos</a>
+    <a class="btn btn-fantasma" href="#trabajos">Ver un caso real</a>
+  </div>
+  <dl class="datos">
+    <div><dt>7.203</dt><dd>modelos de vehículo que el buscador reconoce</dd></div>
+    <div><dt>141</dt><dd>direcciones antiguas redirigidas, sin perder posicionamiento</dd></div>
+    <div><dt>2</dt><dd>canales atendidos por el asistente: WhatsApp e Instagram</dd></div>
+  </dl>
+</section>
+
+<section class="env seccion" id="servicios">
+  <p class="rotulo">Servicios</p>
+  <div class="servicios">
+    <article class="srv"><h3>Sitios web a medida</h3><p>Landing pages y sitios corporativos rápidos, modernos y optimizados para Google.</p></article>
+    <article class="srv"><h3>Tiendas online</h3><p>E-commerce con pasarela de pago, despacho y catálogo.</p></article>
+    <article class="srv"><h3>Asesoría técnica</h3><p>Decisiones de tecnología, hosting, SEO y crecimiento.</p></article>
+    <article class="srv"><h3>Sistemas a medida</h3><p>Plataformas y automatizaciones para tu operación: pedidos, stock, clientes.</p></article>
+  </div>
+</section>
+
+<section class="env seccion" id="trabajos">
+  <p class="rotulo">Trabajos</p>
+  <article class="caso">
+    <div class="caso-cab">
+      <p class="caso-sector">Repuestos diésel · Santiago</p>
+      <h3>STOM Repuestos Diésel</h3>
+      <p>De una tienda en WordPress a una plataforma que sabe qué pieza le sirve a cada vehículo.</p>
     </div>
-    <div class="panel-pie">
-      Santiago, Chile<br>
-      <a href="mailto:plataformasweb.chile@gmail.com">plataformasweb.chile@gmail.com</a><br>
-      <a href="https://instagram.com/plataformasweb.chile" target="_blank" rel="noopener">@plataformasweb.chile</a>
+    <div class="caso-cols">
+      <div class="caso-col">
+        <h4>El problema</h4>
+        <p>Un catálogo donde el comprador no podía saber si la pieza le servía a su camioneta. Cada duda terminaba en un mensaje preguntando lo mismo, y cada respuesta ocupaba a alguien del taller. La venta dependía de que hubiera una persona disponible.</p>
+      </div>
+      <div class="caso-col">
+        <h4>Lo que construimos</h4>
+        <ul>
+          <li><b>Búsqueda por patente.</b> Se escribe la patente y el sitio muestra solo lo compatible con ese vehículo: marca, modelo, año y motor.</li>
+          <li><b>Tienda completa.</b> Pago en línea, despacho calculado por peso y seguimiento del pedido.</li>
+          <li><b>Un asistente en WhatsApp e Instagram</b> que responde consultas y se calla apenas una persona del equipo entra a la conversación.</li>
+          <li><b>Migración sin perder Google.</b> Cada dirección antigua lleva a su equivalente en el sitio nuevo.</li>
+        </ul>
+      </div>
     </div>
-  </aside>
+    <div class="caso-pie">
+      <a href="https://stom.cl" target="_blank" rel="noopener">stom.cl &rarr;</a>
+      <span>Publicado con el consentimiento del cliente.</span>
+    </div>
+  </article>
+</section>
 
-  <main class="contenido" id="top">
+<section class="env seccion" id="proceso">
+  <p class="rotulo">Cómo trabajamos</p>
+  <div class="etapa"><span class="n">ETAPA 01</span><div><h3>Descubrimiento</h3><p>Entendemos tu negocio, objetivos y alcance. Definimos qué construir y por qué.</p></div></div>
+  <div class="etapa"><span class="n">ETAPA 02</span><div><h3>Diseño y desarrollo</h3><p>Diseñamos e implementamos la plataforma con tecnología moderna y buenas prácticas.</p></div></div>
+  <div class="etapa"><span class="n">ETAPA 03</span><div><h3>Deploy y soporte</h3><p>Publicamos, medimos y te acompañamos para que la plataforma siga creciendo.</p></div></div>
+</section>
 
-    <section class="intro">
-      <h1>Del WordPress que te quedó chico a <em>una plataforma propia</em>.</h1>
-      <p>Sitios, tiendas online y sistemas a medida para PyMEs chilenas. Del diseño al deploy, con tecnología moderna y foco en resultados.</p>
-      <div class="acciones">
-        <a class="btn" href="#contacto">Conversemos</a>
-        <a class="enlace" href="#servicios">Ver servicios</a>
-      </div>
-    </section>
+<section class="env seccion" id="contacto">
+  <div class="cierre">
+    <h2>Cuéntanos qué necesitas y te preparamos una propuesta.</h2>
+    <p>Sin compromiso. Respondemos con alcance, plazos y un valor estimado.</p>
+    <div class="acciones">
+      <a class="btn" href="mailto:plataformasweb.chile@gmail.com">Escribir por correo</a>
+      <a class="btn btn-fantasma" href="https://instagram.com/plataformasweb.chile" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+</section>
+</main>
 
-    <section class="bloque" id="servicios">
-      <p class="bloque-rotulo">Servicios</p>
-      <div class="servicios">
-        <article class="servicio">
-          <h3>Sitios web a medida</h3>
-          <p>Landing pages y sitios corporativos rápidos, modernos y optimizados para Google.</p>
-        </article>
-        <article class="servicio">
-          <h3>Tiendas online</h3>
-          <p>E-commerce con pasarela de pago, despacho y catálogo. Listo para vender.</p>
-        </article>
-        <article class="servicio">
-          <h3>Sistemas a medida</h3>
-          <p>Plataformas y automatizaciones para tu operación: pedidos, stock, clientes.</p>
-        </article>
-        <article class="servicio">
-          <h3>Asesoría técnica</h3>
-          <p>Te acompañamos en decisiones de tecnología, hosting, SEO y crecimiento.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="bloque" id="trabajos">
-      <p class="bloque-rotulo">Trabajos</p>
-      <article class="caso">
-        <div class="caso-cab">
-          <span class="caso-sector">Repuestos diésel · Santiago</span>
-          <h3>STOM Repuestos Diésel</h3>
-          <p class="caso-linea">De una tienda en WordPress a una plataforma que sabe qué pieza le sirve a cada vehículo.</p>
-        </div>
-
-        <div class="caso-cuerpo">
-          <div class="caso-col">
-            <h4>El problema</h4>
-            <p>Un catálogo donde el comprador no podía saber si la pieza le servía a su camioneta.
-               Cada duda terminaba en un mensaje preguntando lo mismo, y cada respuesta ocupaba a
-               alguien del taller. La venta dependía de que hubiera una persona disponible.</p>
-          </div>
-          <div class="caso-col">
-            <h4>Lo que construimos</h4>
-            <ul>
-              <li><strong>Búsqueda por patente.</strong> Se escribe la patente y el sitio muestra solo
-                  lo compatible con ese vehículo: marca, modelo, año y motor.</li>
-              <li><strong>Tienda completa.</strong> Pago en línea, despacho calculado por peso y
-                  seguimiento del pedido.</li>
-              <li><strong>Un asistente en WhatsApp e Instagram</strong> que responde consultas y se calla
-                  apenas una persona del equipo entra a la conversación.</li>
-              <li><strong>Migración sin perder Google.</strong> Cada dirección antigua lleva a su
-                  equivalente en el sitio nuevo.</li>
-            </ul>
-          </div>
-        </div>
-
-        <dl class="caso-datos">
-          <div><dt>7.203</dt><dd>modelos de vehículo que el buscador reconoce</dd></div>
-          <div><dt>141</dt><dd>direcciones antiguas redirigidas, sin perder posicionamiento</dd></div>
-          <div><dt>2</dt><dd>canales atendidos por el asistente: WhatsApp e Instagram</dd></div>
-        </dl>
-
-        <div class="caso-pie">
-          <a class="caso-link" href="https://stom.cl" target="_blank" rel="noopener">stom.cl →</a>
-          <span class="caso-nota">Publicado con el consentimiento del cliente.</span>
-        </div>
-      </article>
-    </section>
-
-    <section class="bloque" id="proceso">
-      <p class="bloque-rotulo">Cómo trabajamos</p>
-      <div class="proceso">
-        <article class="etapa">
-          <span class="fase">Etapa 01</span>
-          <div><h3>Descubrimiento</h3><p>Entendemos tu negocio, objetivos y alcance. Definimos qué construir y por qué.</p></div>
-        </article>
-        <article class="etapa">
-          <span class="fase">Etapa 02</span>
-          <div><h3>Diseño y desarrollo</h3><p>Diseñamos e implementamos la plataforma con tecnología moderna y buenas prácticas.</p></div>
-        </article>
-        <article class="etapa">
-          <span class="fase">Etapa 03</span>
-          <div><h3>Deploy y soporte</h3><p>Publicamos, medimos y te acompañamos para que la plataforma siga creciendo.</p></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="cierre" id="contacto">
-      <h2>Cuéntanos qué necesitas y te preparamos una propuesta.</h2>
-      <p>Sin compromiso. Respondemos con alcance, plazos y un valor estimado.</p>
-      <div class="acciones">
-        <a class="btn" href="mailto:plataformasweb.chile@gmail.com?subject=Quiero%20cotizar%20un%20proyecto%20web">Escribir por correo</a>
-        <a class="enlace enlace-claro" href="https://instagram.com/plataformasweb.chile" target="_blank" rel="noopener">Instagram</a>
-      </div>
-    </section>
-
-  </main>
-</div>
-
-</body>
-</html>
+<footer class="env pie"><span>&copy; 2026 Plataformas Web Chile</span><span>Santiago, Chile</span></footer>
+</body></html>
