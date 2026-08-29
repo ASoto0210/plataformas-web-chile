@@ -80,12 +80,17 @@
   .marca .capas i:nth-child(3){width:8px;margin-left:6px}
   .panel-nav{display:flex;flex-direction:column;gap:9px;margin-top:34px;font-size:15px}
   .panel-nav a{color:var(--gris);display:flex;align-items:baseline;gap:10px;transition:color .2s}
-  .panel-nav a::before{content:attr(data-n);font-family:var(--mono);font-size:11px;color:var(--linea)}
+  /* El numero va en el acento como todos los rotulos mono de la pagina. En el gris
+     de linea daba 1.17:1 contra el panel: era un indice que nadie podia leer. */
+  .panel-nav a::before{content:attr(data-n);font-family:var(--mono);font-size:11px;color:var(--acento)}
   .panel-nav a:hover{color:var(--tinta)}
   .panel-pie{font-family:var(--mono);font-size:11.5px;color:var(--gris);line-height:1.9}
   .panel-pie a{border-bottom:1px solid var(--linea)}
   .panel-pie a:hover{border-color:var(--tinta)}
   @media (max-width:900px){.panel-nav{flex-direction:row;flex-wrap:wrap;gap:16px;margin-top:0}
+    /* En el telefono los enlaces median 24px de alto: por debajo del minimo
+       de 44px, y son la navegacion principal. */
+    .panel-nav a{min-height:44px;align-items:center}
     .panel-pie{display:none}}
 
   /* La medida se limita en CADA elemento, no en el contenedor: puesta en .intro
@@ -108,6 +113,11 @@
   .enlace{font-size:15px;color:var(--tinta);border-bottom:1px solid var(--linea);
     padding-bottom:2px;transition:border-color .2s}
   .enlace:hover{border-color:var(--tinta)}
+  /* El area de toque se agranda con un pseudo-elemento y no con padding:
+     el subrayado es un border-bottom y con padding se despegaria del texto. */
+  .marca,.enlace,.caso-link{position:relative}
+  .marca::after,.enlace::after,.caso-link::after{content:'';position:absolute;
+    left:0;right:0;top:50%;transform:translateY(-50%);height:44px}
   .enlace-claro{color:#F2EEE6;border-bottom-color:rgba(242,238,230,.4)}
   .enlace-claro:hover{border-color:#F2EEE6}
 
@@ -178,6 +188,12 @@
   .cierre p{margin-top:14px;color:rgba(242,238,230,.72);max-width:48ch;font-size:16.5px}
   .cierre .acciones{display:flex;gap:14px;margin-top:26px;flex-wrap:wrap}
   .cierre .btn{background:#F2EEE6;color:var(--acento);font-weight:600}
+  /* Quien pide menos movimiento no deberia recibir ninguno. */
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{transition-duration:.01ms !important;
+      animation-duration:.01ms !important;animation-iteration-count:1 !important}
+    html{scroll-behavior:auto !important}
+  }
 </style>
 </head>
 <body>
