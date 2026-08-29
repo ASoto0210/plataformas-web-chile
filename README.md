@@ -36,28 +36,11 @@ directamente o con `python -m http.server` desde la raíz.
   compararon; ganó la v5 y está fusionada en `index.html`. Llevan `noindex`, así que no
   compiten en Google. Se conservan como referencia.
 
-## ⚠️ La marca y el sitio no usan la misma paleta
+## Paleta
 
-Hoy conviven dos identidades de color, y conviene resolverlo antes de imprimir nada:
-
-| Pieza | Paleta |
-|---|---|
-| Kit de logo (`icono-*.svg`, `avatar-instagram.svg`) y **el favicon** | azul `#2F6BFF` + teal `#2CE4C4` sobre tinta azulada `#0B1220` |
-| **El sitio** (v5) y la marca del header | tabaco cálido `#100E0B`, hueso `#E4DCCB`, bronce `#C9AF82` |
-
-No es un descuido del sitio: la v5 se alejó del azul-teal a propósito, porque el gris
-azulado es el tono más visto en la categoría. Pero el resultado es que **la pestaña del
-navegador muestra un ícono azul-teal sobre una página tabaco**, y este README documentaba
-solo la paleta azul.
-
-La marca del header no usa los SVG: son tres barras dibujadas con CSS en color hueso.
-
-**Queda por decidir:** llevar el kit de logo al tabaco, o mantener el azul-teal como marca y
-aceptar el contraste. Mientras no se decida, el favicon es la pieza más visible del desajuste.
-
-### Paletas, para referencia
-
-**Sitio (v5 tabaco)** — están como variables CSS en `:root`:
+**Una sola, la del sitio.** El 29-08-2026 se llevó todo el kit de marca al tabaco: hasta ese
+día el logo y el favicon eran azul-teal mientras el sitio era tabaco, así que la pestaña del
+navegador mostraba un ícono azul sobre una página cálida.
 
 | Nombre | HEX | Uso |
 |---|---|---|
@@ -66,20 +49,22 @@ aceptar el contraste. Mientras no se decida, el favicon es la pieza más visible
 | Tinta | `#EFEBE3` | Texto principal |
 | Gris | `#9A9489` | Texto secundario |
 | Hueso | `#E4DCCB` | Acento, botón principal, marca |
-| Bronce | `#C9AF82` | Solo las cifras del caso |
+| Bronce | `#C9AF82` | Cifras del caso y capa base del símbolo |
+| Intermedio | `#D6C5A6` | Capa media del símbolo |
 
-**Kit de logo (azul-teal)**
+En el sitio están como variables CSS en `:root`.
 
-| Nombre | HEX |
-|---|---|
-| Tinta | `#0B1220` |
-| Azul (acento) | `#2F6BFF` |
-| Azul suave | `#5B8CFF` |
-| Teal | `#2CE4C4` |
-| Neutro claro | `#EAF0FA` |
-| Apagado | `#8A97AD` |
+**Las capas del símbolo ascienden del bronce al hueso** — la que apoya es la más terrosa, la
+que llega arriba es la más luminosa. Es el mismo gesto que cuenta la marca (*una plataforma
+que te eleva*), ahora en la familia cálida.
 
-Variantes para fondo claro: azul `#245BE0`, teal `#12B79B`.
+**Sobre fondo claro** el hueso desaparece, así que `logo-horizontal-claro.svg` usa tonos
+cálidos oscuros: `#6B5330`, `#8C7147` y `#B08F5B`.
+
+⚠️ **Al tamaño de favicon (16px) las tres capas casi se funden**, porque ahora son tonos
+vecinos de la misma familia; antes el azul→teal separaba más. Se distingue la silueta y es
+consistente con la marca del header, que también es monocroma. Si alguna vez molesta, la
+salida es abrir el espacio entre capas, no volver a meter un color frío.
 
 ## Kit de marca
 
