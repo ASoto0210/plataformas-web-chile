@@ -102,6 +102,39 @@
   .bloque-rotulo{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
     color:var(--gris);margin-bottom:26px}
 
+  /* Caso: la prueba de que lo de arriba existe. Ocupa el ancho completo y se lee
+     de corrido —problema, solucion, cifras— porque un portafolio en miniaturas
+     obliga a hacer clic para entender, y aqui el argumento es la historia. */
+  .caso{border:1px solid var(--linea);background:var(--celda)}
+  .caso-cab{padding:clamp(22px,2.6vw,32px);border-bottom:1px solid var(--linea)}
+  .caso-sector{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--acento);display:block;margin-bottom:12px}
+  .caso-cab h3{font-size:clamp(21px,2.4vw,27px);margin-bottom:10px}
+  .caso-linea{color:var(--gris);font-size:16px;max-width:56ch}
+  .caso-cuerpo{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--linea)}
+  .caso-col{background:var(--celda);padding:clamp(20px,2.4vw,30px)}
+  .caso-col h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--gris);font-weight:400;margin:0 0 14px}
+  .caso-col p{color:var(--gris);font-size:15px;max-width:44ch}
+  .caso-col ul{margin:0;padding-left:18px;color:var(--gris);font-size:15px;max-width:44ch}
+  .caso-col li+li{margin-top:9px}
+  .caso-col li strong{color:var(--tinta);font-weight:600}
+  .caso-datos{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--linea);
+    border-top:1px solid var(--linea);margin:0}
+  .caso-datos > div{background:var(--acento-claro);padding:clamp(18px,2.2vw,26px)}
+  .caso-datos dt{font-family:var(--mono);font-size:clamp(24px,3vw,32px);color:var(--acento);
+    line-height:1;font-variant-numeric:tabular-nums}
+  .caso-datos dd{margin:9px 0 0;font-size:13.5px;color:var(--gris);max-width:30ch}
+  .caso-pie{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;
+    padding:clamp(18px,2.2vw,26px);border-top:1px solid var(--linea)}
+  .caso-link{font-family:var(--mono);font-size:13px;color:var(--acento);
+    border-bottom:1px solid var(--acento);padding-bottom:2px}
+  .caso-nota{font-size:13px;color:var(--gris)}
+  @media (max-width:760px){
+    .caso-cuerpo{grid-template-columns:1fr}
+    .caso-datos{grid-template-columns:1fr}
+  }
+
   /* Servicios: dos columnas de fichas planas, sin borde ni sombra, con el numero
      en mono arriba. Al pasar el cursor se tiñe de acento claro. */
   .servicios{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--linea);
@@ -148,8 +181,9 @@
       </a>
       <nav class="panel-nav">
         <a href="#servicios" data-n="01">Servicios</a>
-        <a href="#proceso" data-n="02">Cómo trabajamos</a>
-        <a href="#contacto" data-n="03">Contacto</a>
+        <a href="#trabajos" data-n="02">Trabajos</a>
+        <a href="#proceso" data-n="03">Cómo trabajamos</a>
+        <a href="#contacto" data-n="04">Contacto</a>
       </nav>
     </div>
     <div class="panel-pie">
@@ -195,6 +229,50 @@
           <p>Te acompañamos en decisiones de tecnología, hosting, SEO y crecimiento.</p>
         </article>
       </div>
+    </section>
+
+    <section class="bloque" id="trabajos">
+      <p class="bloque-rotulo">Trabajos</p>
+      <article class="caso">
+        <div class="caso-cab">
+          <span class="caso-sector">Repuestos diésel · Santiago</span>
+          <h3>STOM Repuestos Diésel</h3>
+          <p class="caso-linea">De una tienda en WordPress a una plataforma que sabe qué pieza le sirve a cada vehículo.</p>
+        </div>
+
+        <div class="caso-cuerpo">
+          <div class="caso-col">
+            <h4>El problema</h4>
+            <p>Un catálogo donde el comprador no podía saber si la pieza le servía a su camioneta.
+               Cada duda terminaba en un mensaje preguntando lo mismo, y cada respuesta ocupaba a
+               alguien del taller. La venta dependía de que hubiera una persona disponible.</p>
+          </div>
+          <div class="caso-col">
+            <h4>Lo que construimos</h4>
+            <ul>
+              <li><strong>Búsqueda por patente.</strong> Se escribe la patente y el sitio muestra solo
+                  lo compatible con ese vehículo: marca, modelo, año y motor.</li>
+              <li><strong>Tienda completa.</strong> Pago en línea, despacho calculado por peso y
+                  seguimiento del pedido.</li>
+              <li><strong>Un asistente en WhatsApp e Instagram</strong> que responde consultas y se calla
+                  apenas una persona del equipo entra a la conversación.</li>
+              <li><strong>Migración sin perder Google.</strong> Cada dirección antigua lleva a su
+                  equivalente en el sitio nuevo.</li>
+            </ul>
+          </div>
+        </div>
+
+        <dl class="caso-datos">
+          <div><dt>7.203</dt><dd>modelos de vehículo que el buscador reconoce</dd></div>
+          <div><dt>141</dt><dd>direcciones antiguas redirigidas, sin perder posicionamiento</dd></div>
+          <div><dt>2</dt><dd>canales atendidos por el asistente: WhatsApp e Instagram</dd></div>
+        </dl>
+
+        <div class="caso-pie">
+          <a class="caso-link" href="https://stom.cl" target="_blank" rel="noopener">stom.cl →</a>
+          <span class="caso-nota">Publicado con el consentimiento del cliente.</span>
+        </div>
+      </article>
     </section>
 
     <section class="bloque" id="proceso">
