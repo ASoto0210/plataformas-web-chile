@@ -173,7 +173,45 @@
     *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
     html{scroll-behavior:auto!important}
   }
-</style></head><body id="top">
+</style>
+<!-- Datos estructurados. Sin esto Google ve una pagina de texto y no sabe que hay un
+     negocio detras: quien lo hace, donde atiende, ni como contactarlo. Al cambiar al
+     dominio propio hay que actualizar url, logo, image y el @id, igual que og:url y
+     canonical. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://asoto0210.github.io/plataformas-web-chile/#negocio",
+  "name": "Plataformas Web Chile",
+  "description": "Desarrollo de sitios web, tiendas online y sistemas a medida para PyMEs chilenas. Del diseno al deploy.",
+  "url": "https://asoto0210.github.io/plataformas-web-chile/",
+  "logo": "https://asoto0210.github.io/plataformas-web-chile/icono-color.svg",
+  "image": "https://asoto0210.github.io/plataformas-web-chile/og-image.png",
+  "email": "plataformasweb.chile@gmail.com",
+  "telephone": "+56999918241",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Santiago",
+    "addressCountry": "CL"
+  },
+  "areaServed": { "@type": "Country", "name": "Chile" },
+  "sameAs": ["https://instagram.com/plataformasweb.chile"],
+  "knowsLanguage": "es-CL",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Servicios",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sitios web a medida" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tiendas online" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Asesoria tecnica" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sistemas a medida" } }
+    ]
+  }
+}
+</script>
+</head><body id="top">
 
 <header class="barra"><div class="env">
   <a class="marca" href="#top"><span class="capas" aria-hidden="true"><i></i><i></i><i></i></span>Plataformas Web Chile</a>
