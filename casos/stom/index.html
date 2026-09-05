@@ -80,10 +80,14 @@
   .eti{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;margin-bottom:5px;color:var(--gris)}
   .ahora .eti{color:var(--dato)}
 
-  .cifras{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+  /* Dos por fila, no cuatro: con cuatro columnas «4,7 MB → 886 KB» no cabe y
+     la cifra se parte, dejando esa casilla más alta que las demás. */
+  .cifras{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media (max-width:520px){.cifras{grid-template-columns:1fr}}
   .cifra{border:1px solid var(--linea-fuerte);border-radius:var(--r-sm);padding:15px;background:var(--sup)}
   .cifra .qc{font-size:13px;color:var(--gris);margin-bottom:8px}
-  .cifra .val{font-weight:700;font-size:25px;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+  .cifra .val{font-weight:700;font-size:26px;line-height:1;font-variant-numeric:tabular-nums;
+    letter-spacing:-.02em;white-space:nowrap}
   .cifra .de{color:var(--gris);font-size:18px;font-weight:600}
   .cifra .fl{color:var(--gris);font-size:15px;margin:0 6px;font-weight:400}
   .cifra .a{color:var(--dato)}
