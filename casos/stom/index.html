@@ -114,6 +114,31 @@
 
   footer{border-top:1px solid var(--linea);padding-top:20px;color:var(--gris);font-size:14px}
   footer a{color:var(--dato)}
+
+  /* ---- narración ---- */
+  .barra-voz{
+    position:fixed;left:50%;transform:translateX(-50%);bottom:20px;z-index:50;
+    display:flex;align-items:center;gap:9px;
+    background:var(--sup);border:1px solid var(--linea-fuerte);border-radius:999px;
+    padding:7px 8px 7px 16px;font-size:13px;color:var(--gris);max-width:calc(100vw - 24px);
+  }
+  .barra-voz button{
+    font:inherit;border:1px solid var(--linea-fuerte);border-radius:999px;cursor:pointer;
+    min-height:36px;padding:7px 13px;background:transparent;color:var(--gris);
+  }
+  .barra-voz button:hover:not(:disabled){color:var(--tinta);border-color:var(--tinta)}
+  .barra-voz button.principal{background:var(--hueso);color:#100E0B;border-color:var(--hueso);font-weight:600;padding:7px 17px}
+  .barra-voz button.principal:hover{color:#100E0B}
+  .barra-voz button:disabled{opacity:.35;cursor:default}
+  .barra-voz button:focus-visible{outline:2px solid var(--dato);outline-offset:2px}
+  .paso-voz{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+  /* La sección que se está escuchando se marca por el fondo, no por un borde
+     que desplazaría el texto. */
+  .leyendo{background:var(--sup);box-shadow:-18px 0 0 var(--sup),18px 0 0 var(--sup);border-radius:3px}
+  @media (prefers-reduced-motion: no-preference){.leyendo{transition:background-color .25s ease}}
+  /* El pie no debe quedar tapado por la barra. */
+  .hoja{padding-bottom:120px}
+  @media print{.barra-voz{display:none}}
 </style>
 </head>
 <body>
@@ -241,6 +266,79 @@
     <p>Desarrollo y puesta en marcha: <a href="../../">Plataformas Web Chile</a>. Las cifras están medidas sobre la portada del sitio anterior y la del actual, en el mismo equipo y el mismo día.</p>
   </footer>
 </div>
+
+<div class="barra-voz" role="group" aria-label="Narración">
+  <span class="paso-voz" id="pasoVoz">Escuchar</span>
+  <button type="button" id="voxPrev" title="Sección anterior" aria-label="Sección anterior">‹</button>
+  <button type="button" class="principal" id="voxPlay">▶ Narrar</button>
+  <button type="button" id="voxNext" title="Sección siguiente" aria-label="Sección siguiente">›</button>
+</div>
+
+<script>
+(function () {
+  // Una pista por bloque, en el mismo orden en que están en la página.
+  var bloques = [].slice.call(document.querySelectorAll('.hoja > header, .hoja > section, .hoja > .cierre'));
+  var barra = document.querySelector('.barra-voz');
+  var bPlay = document.getElementById('voxPlay');
+  var bPrev = document.getElementById('voxPrev');
+  var bNext = document.getElementById('voxNext');
+  var etiqueta = document.getElementById('pasoVoz');
+  var PISTAS = 7;
+
+  // Si la página cambia y dejan de calzar los bloques con las pistas, la barra
+  // desaparece en vez de narrar la sección equivocada.
+  if (bloques.length !== PISTAS) { barra.remove(); return; }
+
+  var i = 0, narrando = false;
+  var pista = new Audio();
+  pista.preload = 'none';
+
+  function ruta(k) { return 'audio/caso-' + (k < 10 ? '0' + k : k) + '.mp3'; }
+
+  function pintar() {
+    bloques.forEach(function (b, k) { b.classList.toggle('leyendo', narrando && k === i); });
+    etiqueta.textContent = narrando ? (i + 1) + ' / ' + bloques.length : 'Escuchar';
+    bPrev.disabled = i === 0;
+    bNext.disabled = i === bloques.length - 1;
+  }
+
+  function irA(k) {
+    i = Math.max(0, Math.min(bloques.length - 1, k));
+    try { bloques[i].scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    catch (e) { bloques[i].scrollIntoView(); }
+    pintar();
+  }
+
+  function narrar() {
+    pista.src = ruta(i);
+    var promesa = pista.play();
+    if (promesa && promesa.catch) promesa.catch(function () { detener(); });
+  }
+
+  pista.addEventListener('ended', function () {
+    if (!narrando) return;
+    if (i < bloques.length - 1) { irA(i + 1); setTimeout(narrar, 450); }
+    else { detener(); }
+  });
+  pista.addEventListener('error', function () { if (narrando) detener(); });
+
+  function arrancar() { narrando = true; bPlay.textContent = '⏸ Pausar'; irA(i); narrar(); }
+
+  function detener() {
+    narrando = false;
+    try { pista.pause(); pista.currentTime = 0; } catch (e) {}
+    bPlay.textContent = '▶ Narrar';
+    pintar();
+  }
+
+  bPlay.addEventListener('click', function () { if (narrando) { detener(); } else { arrancar(); } });
+  bPrev.addEventListener('click', function () { var v = narrando; detener(); irA(i - 1); if (v) arrancar(); });
+  bNext.addEventListener('click', function () { var v = narrando; detener(); irA(i + 1); if (v) arrancar(); });
+  window.addEventListener('pagehide', detener);
+
+  pintar();
+})();
+</script>
 
 </body>
 </html>
