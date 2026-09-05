@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>STOM Repuestos Diésel · Caso · Plataformas Web Chile</title>
+<meta name="description" content="De una tienda WordPress genérica a una plataforma que parte por el vehículo del cliente. Con los números medidos antes y después.">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="preload" href="../../fuentes/archivo-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../fuentes/archivo-600-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../fuentes/fuentes-v4.css">
+<meta property="og:title" content="STOM Repuestos Diésel">
+<meta property="og:description" content="De una tienda genérica a una plataforma que sabe qué vehículo tienes. El contenido visible pasó de 22,6 a 3,3 segundos.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://plataformasweb.cl/casos/stom/">
+<meta property="og:site_name" content="Plataformas Web Chile">
+<meta property="og:locale" content="es_CL">
+<meta property="og:image" content="https://plataformasweb.cl/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Plataformas Web Chile — desarrollo y asesorías web">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="STOM Repuestos Diésel">
+<meta name="twitter:description" content="De una tienda genérica a una plataforma que sabe qué vehículo tienes.">
+<meta name="twitter:image" content="https://plataformasweb.cl/og-image.png">
+<link rel="canonical" href="https://plataformasweb.cl/casos/stom/">
+<style>
+  :root{
+    --fondo:#100E0B; --sup:#181510; --sup-alta:#211C15;
+    --linea:rgba(255,255,255,.10); --linea-fuerte:rgba(255,255,255,.20);
+    --tinta:#EFEBE3; --gris:#9A9489;
+    --hueso:#E4DCCB; --dato:#C9AF82;
+    --sans:"Archivo","Segoe UI",system-ui,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+    --r-sm:6px; --r:12px; --r-lg:14px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--fondo); color:var(--tinta);
+    font-family:var(--sans); font-size:16px; line-height:1.6;
+    -webkit-text-size-adjust:100%;
+  }
+  a{color:var(--dato)}
+
+  .hoja{max-width:46rem;margin:0 auto;padding:46px 22px 80px;display:flex;flex-direction:column;gap:52px}
+
+  .volver{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gris);text-decoration:none}
+  .volver:hover{color:var(--tinta)}
+
+  header{display:flex;flex-direction:column;gap:14px}
+  .cliente{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dato)}
+  h1{
+    font-weight:700;font-size:clamp(32px,7vw,50px);line-height:1.02;letter-spacing:-.015em;
+    text-wrap:balance;margin:0;color:var(--hueso);
+  }
+  .bajada{font-size:18px;color:var(--tinta);margin:0;max-width:34em}
+  .bajada b{color:var(--dato);font-weight:600}
+
+  h2{
+    font-weight:700;font-size:22px;letter-spacing:-.01em;margin:0 0 6px;color:var(--hueso);
+  }
+  .sub{color:var(--gris);margin:0 0 20px;max-width:36em;font-size:15px}
+  section{display:flex;flex-direction:column}
+  p{margin:0 0 14px;max-width:36em}
+  p:last-child{margin-bottom:0}
+
+  /* El antes va desaturado y el ahora en tinta: la diferencia se lee antes
+     que el texto. */
+  .pares{display:flex;flex-direction:column;gap:9px}
+  .par{
+    display:grid;grid-template-columns:1fr 1fr;gap:1px;
+    background:var(--linea);border:1px solid var(--linea);border-radius:var(--r-sm);overflow:hidden;
+  }
+  @media (max-width:620px){.par{grid-template-columns:1fr}}
+  .antes,.ahora{padding:13px 15px;font-size:15px}
+  .antes{background:var(--sup);color:var(--gris)}
+  .ahora{background:var(--sup-alta);color:var(--tinta)}
+  .ahora b{color:var(--dato);font-weight:600}
+  .eti{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;margin-bottom:5px;color:var(--gris)}
+  .ahora .eti{color:var(--dato)}
+
+  .cifras{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+  .cifra{border:1px solid var(--linea-fuerte);border-radius:var(--r-sm);padding:15px;background:var(--sup)}
+  .cifra .qc{font-size:13px;color:var(--gris);margin-bottom:8px}
+  .cifra .val{font-weight:700;font-size:25px;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+  .cifra .de{color:var(--gris);font-size:18px;font-weight:600}
+  .cifra .fl{color:var(--gris);font-size:15px;margin:0 6px;font-weight:400}
+  .cifra .a{color:var(--dato)}
+
+  .nota{border-left:2px solid var(--linea-fuerte);padding:2px 0 2px 16px;color:var(--gris);font-size:15px;max-width:36em}
+  .nota b{color:var(--tinta);font-weight:600}
+
+  ul{margin:0 0 14px;padding-left:1.15em;max-width:36em}
+  li{margin-bottom:8px}
+  li::marker{color:var(--dato)}
+
+  .cierre{
+    border:1px solid var(--linea-fuerte);border-radius:var(--r);padding:24px;background:var(--sup);
+    display:flex;flex-direction:column;gap:12px;
+  }
+  .cierre p{margin:0}
+  .acciones{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+  .boton{
+    display:inline-block;text-decoration:none;border-radius:999px;padding:10px 20px;font-size:15px;font-weight:600;
+    background:var(--hueso);color:#100E0B;
+  }
+  .boton.sec{background:transparent;color:var(--tinta);border:1px solid var(--linea-fuerte);font-weight:400}
+  .boton.sec:hover{border-color:var(--tinta)}
+
+  footer{border-top:1px solid var(--linea);padding-top:20px;color:var(--gris);font-size:14px}
+  footer a{color:var(--dato)}
+</style>
+</head>
+<body>
+
+<div class="hoja">
+
+  <a class="volver" href="../../">← Plataformas Web Chile</a>
+
+  <header>
+    <div class="cliente">Caso · STOM Repuestos Diésel</div>
+    <h1>Una tienda que sabe qué vehículo tienes</h1>
+    <p class="bajada">Un negocio de repuestos diésel vendía online con una tienda genérica: el cliente buscaba por palabra y <b>adivinaba</b> si la pieza le servía. Hoy pone su patente y ve solo lo compatible.</p>
+    <p class="bajada" style="font-size:15px;color:var(--gris)">Y cuando el repuesto no está, ya no se va: deja sus datos y queda una cotización.</p>
+  </header>
+
+  <section>
+    <h2>El problema no era el sitio</h2>
+    <p class="sub">Funcionaba. Mostraba productos y cobraba. El problema era otro.</p>
+    <p>
+      Un repuesto diésel no se compra por nombre. Se compra por <b>vehículo</b>: marca, modelo, año
+      y motor. Una tienda armada sobre un molde genérico no sabe nada de eso — trata un turbo igual
+      que trata una polera, y le pide al cliente que resuelva él la parte difícil.
+    </p>
+    <p>
+      Así, cada visita terminaba en una de dos: o el cliente compraba con dudas, o se iba sin dejar
+      rastro. La segunda es la cara: <b>alguien que necesitaba exactamente lo que vendes y no pudo
+      encontrarlo.</b>
+    </p>
+  </section>
+
+  <section>
+    <h2>Lo que cambia para quien compra</h2>
+    <p class="sub">Seis diferencias que se notan sin que nadie las explique.</p>
+    <div class="pares">
+      <div class="par">
+        <div class="antes"><span class="eti">Antes</span>Buscaba por palabra y adivinaba si servía para su vehículo</div>
+        <div class="ahora"><span class="eti">Ahora</span>Ingresa <b>su patente o el VIN</b> y ve solo repuestos compatibles</div>
+      </div>
+      <div class="par">
+        <div class="antes"><span class="eti">Antes</span>Un filtro de categorías genérico</div>
+        <div class="ahora"><span class="eti">Ahora</span>Elige <b>marca → modelo → año → motor</b></div>
+      </div>
+      <div class="par">
+        <div class="antes"><span class="eti">Antes</span>Si no estaba el repuesto, no había nada que hacer</div>
+        <div class="ahora"><span class="eti">Ahora</span>Deja sus datos y <b>queda una cotización</b> para el vendedor</div>
+      </div>
+      <div class="par">
+        <div class="antes"><span class="eti">Antes</span>El botón de WhatsApp abría un chat vacío</div>
+        <div class="ahora"><span class="eti">Ahora</span>El WhatsApp <b>responde solo</b>: stock, precio y cotización</div>
+      </div>
+      <div class="par">
+        <div class="antes"><span class="eti">Antes</span>Había que crear cuenta para comprar</div>
+        <div class="ahora"><span class="eti">Ahora</span><b>Compra como invitado</b> y paga con tarjeta al instante</div>
+      </div>
+      <div class="par">
+        <div class="antes"><span class="eti">Antes</span>Todos los clientes eran iguales</div>
+        <div class="ahora"><span class="eti">Ahora</span>Distingue <b>particular, taller y distribuidor</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Los números</h2>
+    <p class="sub">La velocidad es la única diferencia técnica que un cliente <i>siente</i> sin que se la expliquen. Medido sobre la misma portada, la misma máquina y en móvil, mediana de tres pasadas.</p>
+    <div class="cifras">
+      <div class="cifra">
+        <div class="qc">Hasta ver el contenido</div>
+        <div class="val"><span class="de">22,6 s</span><span class="fl">→</span><span class="a">3,3 s</span></div>
+      </div>
+      <div class="cifra">
+        <div class="qc">Peso de la página</div>
+        <div class="val"><span class="de">4,7 MB</span><span class="fl">→</span><span class="a">886 KB</span></div>
+      </div>
+      <div class="cifra">
+        <div class="qc">Peticiones</div>
+        <div class="val"><span class="de">87</span><span class="fl">→</span><span class="a">44</span></div>
+      </div>
+      <div class="cifra">
+        <div class="qc">Respuesta del servidor</div>
+        <div class="val"><span class="de">1,6 s</span><span class="fl">→</span><span class="a">0,52 s</span></div>
+      </div>
+    </div>
+    <p class="nota" style="margin-top:18px">
+      En un teléfono, con datos móviles y de pie en un taller, <b>esos veinte segundos eran la
+      diferencia entre esperar y cerrar la pestaña</b>. Y al cambiar de sección ya no hay recarga:
+      el contenido cambia y listo.
+    </p>
+  </section>
+
+  <section>
+    <h2>Qué hay debajo</h2>
+    <p class="sub">Para quien quiera saberlo. Al cliente final no le dice nada, y no hace falta contárselo.</p>
+    <ul>
+      <li><b>Catálogo de vehículos estructurado</b>: 133 marcas y 3.736 modelos, cargados desde el registro público de tasación, con compatibilidad pieza ↔ vehículo en vez de etiquetas sueltas.</li>
+      <li><b>Búsqueda por patente y VIN</b> contra un servicio de identificación, con caché para no pagar dos veces la misma consulta.</li>
+      <li><b>Asistente de WhatsApp</b> sobre la API oficial: responde por categoría, arma cotizaciones y deriva a una persona cuando no sabe. Nunca inventa un dato de catálogo.</li>
+      <li><b>Pagos, despacho y facturación</b> integrados, con el estado del pago separado del estado del pedido.</li>
+      <li>Y <b>ninguna dependencia de complementos de terceros</b>: nada que se rompa en una actualización ni que haya que renovar cada año.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Cómo se hizo el cambio</h2>
+    <p>
+      La plataforma nueva vivió meses en un subdominio de prueba, con el catálogo real cargado,
+      <b>sin tocar el sitio en producción ni el correo del dominio</b>. El cambio se hizo el día que
+      todo estaba validado, y se pudo revertir en cualquier momento hasta el último minuto.
+    </p>
+    <p class="nota">
+      Es la parte que menos se ve y la que más tranquilidad da: <b>nadie se enteró de que hubo una
+      migración</b>, salvo porque el sitio empezó a cargar antes.
+    </p>
+  </section>
+
+  <div class="cierre">
+    <p><b>¿Tu negocio vende algo que el cliente no puede buscar por nombre?</b></p>
+    <p style="color:var(--gris)">Repuestos, insumos, medidas, compatibilidades. Si tu catálogo tiene esa forma, una tienda genérica te está costando ventas que ni siquiera aparecen en el reporte.</p>
+    <div class="acciones">
+      <a class="boton" href="../../#contacto">Conversemos</a>
+      <a class="boton sec" href="https://stom.cl" target="_blank" rel="noopener">Ver stom.cl</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>Desarrollo y puesta en marcha: <a href="../../">Plataformas Web Chile</a>. Las cifras están medidas sobre la portada del sitio anterior y la del actual, en el mismo equipo y el mismo día.</p>
+  </footer>
+</div>
+
+</body>
+</html>
