@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dieciocho palabras · Plataformas Web Chile</title>
+<meta name="description" content="Las palabras que aparecen en cualquier conversación sobre redes y medición, explicadas por lo que significan para un negocio que vende. Una por ficha, narradas.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preload" href="../fuentes/archivo-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fuentes/archivo-600-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../fuentes/fuentes-v4.css">
+<meta property="og:title" content="Dieciocho palabras">
+<meta property="og:description" content="El vocabulario de redes y medición, explicado por lo que significa para un negocio que vende.">
+<meta property="og:type" content="article">
+<style>
+  /* Misma identidad que la portada: negro cálido, tinta hueso, bronce solo
+     para los datos. El acento no compite con el texto, lo ordena. */
+  :root{
+    --fondo:#100E0B; --sup:#181510; --sup-alta:#211C15;
+    --linea:rgba(255,255,255,.10); --linea-fuerte:rgba(255,255,255,.20);
+    --tinta:#EFEBE3; --gris:#9A9489;
+    --hueso:#E4DCCB; --dato:#C9AF82;
+    --sans:"Archivo","Segoe UI",system-ui,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+    --r-sm:6px; --r:12px; --r-lg:14px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--fondo); color:var(--tinta);
+    font-family:var(--sans); font-size:16px; line-height:1.55;
+    -webkit-text-size-adjust:100%;
+  }
+  a{color:var(--hueso)}
+
+  .escenario{min-height:100vh;display:flex;flex-direction:column;max-width:52rem;margin:0 auto;padding:0 22px}
+  .pista{height:2px;background:var(--linea);margin:0 -22px;flex:none}
+  .avance{height:100%;width:0;background:var(--dato);transition:width .3s ease}
+  @media (prefers-reduced-motion: reduce){.avance{transition:none}}
+
+  .ficha{flex:1;display:flex;flex-direction:column;justify-content:center;padding:44px 0 132px;min-width:0}
+
+  /* Las familias agrupan por para qué sirve cada palabra. No es adorno:
+     cambia cómo se usa el número. */
+  .familia{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px;color:var(--gris)}
+  .familia b{color:var(--dato);font-weight:400}
+
+  .termino{
+    font-family:var(--sans);font-weight:700;
+    font-size:clamp(38px,10vw,74px);line-height:.98;letter-spacing:-.01em;
+    text-wrap:balance;margin:0 0 20px;color:var(--hueso);
+  }
+  .def{font-size:clamp(17px,2.6vw,21px);margin:0 0 16px;max-width:30em}
+  .def b{color:var(--dato);font-weight:600}
+  .aca{font-size:15.5px;color:var(--gris);margin:0;max-width:32em;border-left:2px solid var(--linea-fuerte);padding-left:15px}
+  .aca b{color:var(--tinta);font-weight:600}
+
+  .portada .termino{font-size:clamp(34px,8.5vw,60px)}
+  .portada .def{color:var(--tinta)}
+  .firma{margin-top:26px;font-family:var(--mono);font-size:12px;color:var(--gris);letter-spacing:.04em}
+  .firma a{color:var(--dato);text-decoration:none;border-bottom:1px solid var(--linea-fuerte)}
+  .firma a:hover{border-color:var(--dato)}
+
+  .mando{
+    position:fixed;left:50%;transform:translateX(-50%);bottom:20px;z-index:50;
+    display:flex;align-items:center;gap:9px;
+    background:var(--sup);border:1px solid var(--linea-fuerte);border-radius:999px;
+    padding:7px 8px 7px 16px;font-size:13px;color:var(--gris);max-width:calc(100vw - 24px);
+  }
+  .mando button{
+    font:inherit;border:1px solid var(--linea-fuerte);border-radius:999px;cursor:pointer;
+    min-height:36px;padding:7px 13px;background:transparent;color:var(--gris);
+  }
+  .mando button:hover:not(:disabled){color:var(--tinta);border-color:var(--tinta)}
+  .mando button.principal{background:var(--hueso);color:#100E0B;border-color:var(--hueso);font-weight:600;padding:7px 17px}
+  .mando button.principal:hover{color:#100E0B}
+  .mando button:disabled{opacity:.35;cursor:default}
+  .mando button:focus-visible{outline:2px solid var(--dato);outline-offset:2px}
+  .cuenta{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .pie{
+    position:fixed;left:50%;transform:translateX(-50%);bottom:68px;z-index:49;
+    font-family:var(--mono);font-size:11px;color:var(--gris);background:var(--fondo);
+    padding:3px 12px;border-radius:999px;text-align:center;max-width:calc(100vw - 32px);
+    letter-spacing:.04em;
+  }
+  @media print{.mando,.pie,.pista{display:none}}
+</style>
+</head>
+<body>
+
+<div class="escenario">
+  <div class="pista"><div class="avance" id="avance"></div></div>
+  <div class="ficha" id="ficha"></div>
+</div>
+
+<div class="pie" id="pie"></div>
+<div class="mando" role="group" aria-label="Controles">
+  <span class="cuenta"><span id="n">1</span> / <span id="total">1</span></span>
+  <button type="button" id="prev" title="Anterior" aria-label="Anterior">‹</button>
+  <button type="button" class="principal" id="hablar">▶ Narrar</button>
+  <button type="button" id="next" title="Siguiente" aria-label="Siguiente">›</button>
+</div>
+
+<script>
+(function () {
+  var fichas = [
+    { clase:'portada', familia:'', termino:'Dieciocho<br>palabras',
+      def:'Las que aparecen en cualquier conversación sobre redes y medición, explicadas por lo que significan <b>para un negocio que vende</b>.',
+      aca:'Van agrupadas por para qué sirven: lo que se publica, lo que se mide, lo que se cobra. Y al final una que confunde a todo el mundo la primera semana.',
+      voz:'Dieciocho palabras. Son las que aparecen en cualquier conversación sobre redes y medición, explicadas por lo que significan para un negocio que vende, no en abstracto. Van agrupadas por para qué sirven: lo que se publica, lo que se mide y lo que se cobra.' },
+
+    { familia:'Lo que se <b>publica</b>', termino:'Orgánico',
+      def:'Lo que se publica <b>sin pagar</b>.',
+      aca:'Llega sobre todo a quien ya sigue la cuenta. Es gratis en plata y caro en constancia.',
+      voz:'Orgánico. Es lo que se publica sin pagar. Llega sobre todo a quien ya sigue la cuenta: es gratis en plata y caro en constancia.' },
+
+    { familia:'Lo que se <b>publica</b>', termino:'Pauta',
+      def:'Publicidad <b>pagada</b>.',
+      aca:'Permite elegir a quién se le muestra —comuna, edad, intereses— y llegar a quien todavía no te conoce.',
+      voz:'Pauta. Es publicidad pagada. Permite elegir a quién se le muestra, por comuna, edad o intereses, y llegar a quien todavía no te conoce.' },
+
+    { familia:'Lo que se <b>publica</b>', termino:'Alcance',
+      def:'Cuántas <b>personas distintas</b> vieron algo.',
+      aca:'No cuántas veces se mostró: eso son las impresiones, y ahí la misma persona puede sumar diez.',
+      voz:'Alcance. Cuántas personas distintas vieron algo. No es cuántas veces se mostró: eso son las impresiones, y ahí la misma persona puede sumar diez.' },
+
+    { familia:'Lo que se <b>publica</b>', termino:'Engagement',
+      def:'Likes, comentarios, guardados y compartidos.',
+      aca:'De todos, los que valen son <b>guardados y compartidos</b>: significan que le sirvió a alguien.',
+      voz:'Engagement. Son los likes, comentarios, guardados y compartidos. De todos, los que valen son guardados y compartidos: significan que le sirvió a alguien de verdad.' },
+
+    { familia:'Lo que se <b>mide</b>', termino:'Conversación<br>iniciada',
+      def:'Alguien escribió por mensaje directo o abrió el WhatsApp desde el sitio.',
+      aca:'<b>En muchos rubros es el número que importa.</b> Nadie compra algo caro sin preguntar antes.',
+      voz:'Conversación iniciada. Alguien escribió por mensaje directo, o abrió el WhatsApp desde el sitio. En muchos rubros es el número que importa: nadie compra algo caro sin preguntar antes.' },
+
+    { familia:'Lo que se <b>mide</b>', termino:'Lead',
+      def:'Un interesado con datos suficientes para contactarlo.',
+      aca:'En un negocio de presupuestos, es la <b>solicitud que queda registrada</b>: qué necesita y cómo ubicarlo.',
+      voz:'Lead. Un interesado con datos suficientes para poder contactarlo. En un negocio de presupuestos es la solicitud que queda registrada: qué necesita, y cómo ubicarlo.' },
+
+    { familia:'Lo que se <b>mide</b>', termino:'Conversión',
+      def:'La acción que uno quiere que ocurra.',
+      aca:'Casi siempre hay dos: <b>que escriban</b>, y <b>que compren</b>. Conviene medir las dos, no solo la segunda.',
+      voz:'Conversión. Es la acción que uno quiere que ocurra. Casi siempre hay dos: que escriban, y que compren. Conviene medir las dos, no solo la segunda.' },
+
+    { familia:'Lo que se <b>mide</b>', termino:'Embudo',
+      def:'La cadena que va de quien ve el contenido a quien compra.',
+      aca:'Se llama así porque en cada paso queda menos gente. Sirve para ver <b>dónde se está perdiendo</b>.',
+      voz:'Embudo. Es la cadena que va desde quien ve el contenido hasta quien compra. Se llama así porque en cada paso queda menos gente, y sirve para ver dónde se está perdiendo.' },
+
+    { familia:'Lo que se <b>mide</b>', termino:'Atribución',
+      def:'Poder decir <b>de dónde vino</b> una venta.',
+      aca:'Es lo que más se rompe en la práctica. Cuando alguien salta del sitio a WhatsApp, el rastro se corta: del otro lado hay un número de teléfono y nada más.',
+      voz:'Atribución. Poder decir de dónde vino una venta. Es lo que más se rompe en la práctica: cuando alguien salta del sitio a WhatsApp el rastro se corta, porque del otro lado hay un número de teléfono y nada más.' },
+
+    { familia:'Lo que se <b>mide</b>', termino:'UTM',
+      def:'Una etiqueta que se pega al final de un enlace.',
+      aca:'Sirve para saber de qué publicación vino la visita. <b>Invisible para el cliente</b>: hace clic y llega a la misma página de siempre.',
+      voz:'U T M. Es una etiqueta que se pega al final de un enlace, para saber después de qué publicación vino la visita. Es invisible para el cliente: hace clic y llega a la misma página de siempre.' },
+
+    { familia:'Lo que se <b>mide</b>', termino:'Píxel',
+      def:'Un pedacito de código en el sitio que le avisa a Meta o TikTok lo que hizo el visitante.',
+      aca:'Es lo que permite <b>mostrarle un anuncio después</b>.',
+      voz:'Píxel. Un pedacito de código en el sitio, que le avisa a Meta o a TikTok lo que hizo el visitante. Es lo que permite mostrarle un anuncio después.' },
+
+    { familia:'Lo que se <b>mide</b>', termino:'Conversions<br>API',
+      def:'Lo mismo que el píxel, pero enviado <b>desde el servidor</b>.',
+      aca:'Importa porque los bloqueadores de anuncios y el iPhone se comen buena parte de lo que manda el navegador.',
+      voz:'Conversions A P I. Es lo mismo que el píxel, pero enviado desde el servidor. Importa porque los bloqueadores de anuncios y el iPhone se comen buena parte de lo que manda el navegador.' },
+
+    { familia:'Lo que se <b>cobra</b>', termino:'Costo por<br>conversación',
+      def:'Cuánta plata de pauta costó <b>cada persona que escribió</b>.',
+      aca:'Es el número que dice si conviene subir o bajar el presupuesto.',
+      voz:'Costo por conversación. Cuánta plata de pauta costó cada persona que escribió. Es el número que dice si conviene subir o bajar el presupuesto.' },
+
+    { familia:'Lo que se <b>cobra</b>', termino:'Ticket<br>promedio',
+      def:'Cuánto gasta en promedio quien compra.',
+      aca:'Sirve para comparar orígenes: <b>un cliente mayorista vale mucho más que un particular</b>, aunque escriba menos veces.',
+      voz:'Ticket promedio. Cuánto gasta en promedio quien compra. Sirve para comparar orígenes: un cliente mayorista vale mucho más que un particular, aunque escriba menos veces.' },
+
+    { familia:'Lo que se <b>cobra</b>', termino:'ROAS',
+      def:'Cuántos pesos vuelven <b>por cada peso de pauta</b>.',
+      aca:'Con un ROAS de 4, mil pesos invertidos devolvieron cuatro mil en ventas.',
+      voz:'R O A S. Cuántos pesos vuelven por cada peso de pauta. Con un ROAS de cuatro, mil pesos invertidos devolvieron cuatro mil en ventas.' },
+
+    { familia:'Lo que se <b>cobra</b>', termino:'Remarketing',
+      def:'Volver a mostrarle un anuncio a quien ya visitó el sitio y no compró.',
+      aca:'Es el <b>público más barato de convencer</b>: ya sabe quién eres.',
+      voz:'Remarketing. Volver a mostrarle un anuncio a quien ya visitó el sitio y no compró. Es el público más barato de convencer, porque ya sabe quién eres.' },
+
+    { familia:'Lo que se <b>cobra</b>', termino:'Recompra',
+      def:'Que un cliente vuelva.',
+      aca:'En algunos rubros es predecible —filtros y aceite cada 10.000 km—, y ahí <b>es la venta más barata que existe</b>: no costó nada volver a llegarle.',
+      voz:'Recompra. Que un cliente vuelva. En algunos rubros es predecible, como los filtros y el aceite cada diez mil kilómetros, y ahí es la venta más barata que existe: no costó nada volver a llegarle.' },
+
+    { familia:'Y una del <b>día a día</b>', termino:'Estado del pedido<br>≠ estado del pago',
+      def:'Uno dice dónde va el despacho. El otro, si el dinero llegó.',
+      aca:'<b>Un pedido puede existir sin estar pagado.</b> Es la confusión más común de las primeras semanas con cualquier tienda, y explica por qué a veces el panel no deja avanzar un pedido.',
+      voz:'Y una del día a día: estado del pedido no es lo mismo que estado del pago. Uno dice dónde va el despacho; el otro, si el dinero llegó. Un pedido puede existir sin estar pagado. Es la confusión más común de las primeras semanas con cualquier tienda, y explica por qué a veces el panel no deja avanzar un pedido.' }
+  ];
+
+  var i = 0, narrando = false;
+  var el = document.getElementById('ficha');
+  var bPrev = document.getElementById('prev');
+  var bNext = document.getElementById('next');
+  var bHablar = document.getElementById('hablar');
+  var pie = document.getElementById('pie');
+
+  document.getElementById('total').textContent = fichas.length;
+  pie.textContent = 'Flechas para moverte · espacio para narrar';
+
+  function pintar() {
+    var f = fichas[i];
+    el.className = 'ficha' + (f.clase ? ' ' + f.clase : '');
+    el.innerHTML =
+      (f.familia ? '<div class="familia">' + f.familia + '</div>' : '') +
+      '<h1 class="termino">' + f.termino + '</h1>' +
+      '<p class="def">' + f.def + '</p>' +
+      '<p class="aca">' + f.aca + '</p>' +
+      (f.clase === 'portada'
+        ? '<p class="firma">Plataformas Web Chile · <a href="../">plataformasweb.cl</a></p>' : '');
+    document.getElementById('n').textContent = i + 1;
+    document.getElementById('avance').style.width = ((i + 1) / fichas.length * 100) + '%';
+    bPrev.disabled = i === 0;
+    bNext.disabled = i === fichas.length - 1;
+    try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) { window.scrollTo(0, 0); }
+  }
+
+  // Audio grabado, un archivo por ficha. Acá son archivos de verdad, no incrustados:
+  // el sitio es propio y no hay restricción para servirlos.
+  var pista = new Audio();
+  pista.preload = 'none';
+
+  function ruta(k) { return 'audio/glo-' + (k < 10 ? '0' + k : k) + '.mp3'; }
+
+  function narrar() {
+    pista.src = ruta(i);
+    var promesa = pista.play();
+    if (promesa && promesa.catch) promesa.catch(function () { detener(); });
+  }
+
+  pista.addEventListener('ended', function () {
+    if (!narrando) return;
+    if (i < fichas.length - 1) { i++; pintar(); setTimeout(narrar, 450); }
+    else { detener(); }
+  });
+  pista.addEventListener('error', function () { if (narrando) detener(); });
+
+  function arrancar() { narrando = true; bHablar.textContent = '⏸ Pausar'; narrar(); }
+
+  function detener() {
+    narrando = false;
+    try { pista.pause(); pista.currentTime = 0; } catch (e) {}
+    bHablar.textContent = '▶ Narrar';
+  }
+
+  function mover(d) {
+    var seguia = narrando;
+    detener();
+    i = Math.max(0, Math.min(fichas.length - 1, i + d));
+    pintar();
+    if (seguia) arrancar();
+  }
+
+  bPrev.addEventListener('click', function () { mover(-1); });
+  bNext.addEventListener('click', function () { mover(1); });
+  bHablar.addEventListener('click', function () { if (narrando) { detener(); } else { arrancar(); } });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { mover(1); }
+    else if (e.key === 'ArrowLeft') { mover(-1); }
+    else if (e.key === ' ') { e.preventDefault(); if (narrando) { detener(); } else { arrancar(); } }
+  });
+  window.addEventListener('pagehide', detener);
+
+  pintar();
+})();
+</script>
+</body>
+</html>
