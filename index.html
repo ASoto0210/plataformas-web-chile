@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Plataformas Web Chile — Desarrollo y asesorías web</title>
-<meta name="description" content="Tiendas online y sistemas a medida para PyMEs chilenas: el cliente encuentra lo que le sirve, el stock se actualiza solo y nada se despacha sin pago.">
+<title>Plataformas Web Chile — Tiendas para catálogos complejos</title>
+<meta name="description" content="Tiendas online para lo que el cliente no puede buscar por nombre: repuestos, insumos y compatibilidades. Búsqueda por vehículo y patente, cotizaciones y stock sincronizado.">
 <meta name="color-scheme" content="dark">
-<meta property="og:title" content="Plataformas Web Chile — Desarrollo y asesorías web">
-<meta property="og:description" content="Tu tienda vende, cobra y avisa sola. Tú te dedicas al negocio.">
+<meta property="og:title" content="Plataformas Web Chile — Tiendas para catálogos complejos">
+<meta property="og:description" content="Tiendas online para lo que tu cliente no puede buscar por nombre.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://plataformasweb.cl/">
 <meta property="og:image" content="https://plataformasweb.cl/og-image.png">
@@ -158,6 +158,37 @@
   @media (max-width:620px){.caso-pie{flex-direction:column;align-items:flex-start;gap:11px}}
   @media (max-width:760px){.caso-cols{grid-template-columns:1fr}}
 
+  /* Titulo de seccion grande, bajo el rotulo en mono. */
+  .tit-sec{font-size:clamp(24px,3vw,34px);font-weight:700;letter-spacing:-.025em;line-height:1.15;
+    color:var(--hueso);margin:-14px 0 26px;max-width:28ch}
+  /* Tres costos o tres condiciones: columnas iguales separadas por una linea. */
+  .costos{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--linea);
+    border:1px solid var(--linea);border-radius:var(--r);overflow:hidden}
+  .costo{background:var(--sup);padding:clamp(22px,2.4vw,30px)}
+  .n-costo{display:block;font-family:var(--mono);font-size:12px;color:var(--dato);margin-bottom:12px}
+  .costo h3{font-size:18px;margin:0 0 8px;font-weight:600;letter-spacing:-.012em;color:var(--hueso)}
+  .costo p{margin:0;color:var(--gris);font-size:14.5px}
+  @media (max-width:820px){.costos{grid-template-columns:1fr}}
+  /* Comparacion: en telefono la tabla se desplaza DENTRO de su caja (la pagina no) y
+     la primera columna queda fija para no perder de que fila se trata. */
+  .comp-intro{color:var(--gris);max-width:62ch;margin:0 0 22px;font-size:15.5px}
+  .tabla-env{overflow-x:auto;border:1px solid var(--linea);border-radius:var(--r);-webkit-overflow-scrolling:touch}
+  .tabla-env:focus-visible{outline:2px solid var(--hueso);outline-offset:3px}
+  .comp{width:100%;min-width:820px;border-collapse:collapse;font-size:14px}
+  .comp th,.comp td{padding:13px 15px;text-align:left;vertical-align:top;border-bottom:1px solid var(--linea)}
+  .comp tbody tr:last-child th,.comp tbody tr:last-child td{border-bottom:0}
+  .comp thead th{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--gris);font-weight:400;background:var(--sup)}
+  .comp tbody th{color:var(--tinta);font-weight:600;width:22%;background:var(--sup)}
+  .comp td{color:var(--gris)}
+  .comp th:first-child{position:sticky;left:0;z-index:1}
+  .comp .nos{background:var(--sup-alta);color:var(--hueso);font-weight:600}
+  .comp thead .nos{color:var(--dato)}
+  .desliza{display:none;font-family:var(--mono);font-size:11.5px;color:var(--dato);margin:0 0 10px}
+  @media (max-width:860px){.desliza{display:block}}
+  .comp-nota{color:var(--gris);font-size:12.5px;margin:12px 0 0}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
   /* Practicas: seis areas iguales, sin jerarquia entre ellas (a diferencia de los
      servicios). Cada una lleva prueba concreta, no adjetivos. */
   .practicas-intro{color:var(--gris);max-width:62ch;margin:-12px 0 28px;font-size:15.5px}
@@ -206,7 +237,7 @@
   "@type": "ProfessionalService",
   "@id": "https://plataformasweb.cl/#negocio",
   "name": "Plataformas Web Chile",
-  "description": "Tiendas online y sistemas a medida para PyMEs chilenas: el cliente encuentra lo que le sirve, el stock se actualiza solo y nada se despacha sin pago.",
+  "description": "Tiendas online para lo que el cliente no puede buscar por nombre: repuestos, insumos y compatibilidades. Búsqueda por vehículo y patente, cotizaciones y stock sincronizado.",
   "url": "https://plataformasweb.cl/",
   "logo": "https://plataformasweb.cl/icono-color.svg",
   "image": "https://plataformasweb.cl/og-image.png",
@@ -225,10 +256,10 @@
     "@type": "OfferCatalog",
     "name": "Servicios",
     "itemListElement": [
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sitios web a medida" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tiendas online" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Asesoria tecnica" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sistemas a medida" } }
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tiendas para catálogos complejos" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Migración sin perder Google" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Automatización de la operación" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Asesoría" } }
     ]
   }
 }
@@ -237,32 +268,67 @@
 
 <header class="barra"><div class="env">
   <a class="marca" href="#top"><span class="capas" aria-hidden="true"><i></i><i></i><i></i></span>Plataformas Web Chile</a>
-  <nav><a href="#servicios">Servicios</a><a href="#trabajos">Trabajos</a><a href="#practicas">Qué incluye</a><a href="#proceso">Cómo trabajamos</a><a href="#contacto">Contacto</a></nav>
+  <nav><a href="#servicios">Qué hacemos</a><a href="#comparacion">Comparación</a><a href="#trabajos">Trabajos</a><a href="#practicas">Qué incluye</a><a href="#contacto">Contacto</a></nav>
 </div></header>
 
 <main>
 <section class="env hero">
-  <h1>Tu tienda vende, cobra y avisa sola. <em>Tú te dedicas al negocio.</em></h1>
-  <p>Para PyMEs que ya venden y chocaron con el techo de una tienda genérica: el cliente encuentra lo que le sirve, cada consulta queda como cotización, el stock se actualiza solo y nada se despacha sin pago. Lo diseñamos, lo construimos y lo dejamos funcionando contigo.</p>
+  <h1>Tiendas online para lo que tu cliente <em>no puede buscar por nombre.</em></h1>
+  <p>Repuestos, insumos, medidas, compatibilidades. Tu cliente pone su patente o su medida y ve solo lo que le sirve; si no está, queda como cotización. El stock se actualiza solo y nada se despacha sin pago.</p>
   <div class="acciones">
     <a class="btn" href="#contacto">Conversemos</a>
-    <a class="btn btn-fantasma" href="#trabajos">Ver un caso real</a>
+    <a class="btn btn-fantasma" href="#trabajos">Ver el caso STOM</a>
   </div>
   <dl class="datos">
     <div><dt>3,3 s</dt><dd>hasta ver la tienda en el celular. Antes eran 22,6 s y el cliente se iba</dd></div>
+    <div><dt>6.883</dt><dd>compatibilidades pieza ↔ vehículo que ordenan el catálogo</dd></div>
     <div><dt>3.300+</dt><dd>productos con stock y precio al día cada noche, sin tocar una ficha</dd></div>
-    <div><dt>Al instante</dt><dd>el aviso de cada pedido y cotización, aunque llegue de madrugada</dd></div>
   </dl>
 </section>
 
-<section class="env seccion" id="servicios">
-  <h2 class="rotulo">Servicios</h2>
-  <div class="servicios">
-    <article class="srv"><h3>Sitios web a medida</h3><p>Un sitio que Google entiende y que convierte visitas en contactos, no una tarjeta de presentación que nadie encuentra.</p></article>
-    <article class="srv"><h3>Tiendas online</h3><p>Pago, despacho y catálogo conectados: la venta se cierra aunque no estés mirando.</p></article>
-    <article class="srv"><h3>Asesoría técnica</h3><p>Decidir antes de gastar: qué construir, qué no, y cuánto te va a costar mantenerlo.</p></article>
-    <article class="srv"><h3>Sistemas a medida</h3><p>Automatizar lo que hoy alguien hace a mano: stock, precios, pedidos y cotizaciones.</p></article>
+<section class="env seccion" id="problema">
+  <h2 class="rotulo">El problema</h2>
+  <p class="tit-sec">Lo que le cuesta una tienda genérica a un catálogo complejo</p>
+  <div class="costos">
+    <div class="costo"><span class="n-costo">01</span><h3>El cliente adivina</h3><p>Compra con dudas, pregunta lo mismo diez veces por WhatsApp o devuelve la pieza porque no era para su vehículo.</p></div>
+    <div class="costo"><span class="n-costo">02</span><h3>El que no encuentra, se va sin dejar rastro</h3><p>Necesitaba exactamente lo que vendes y no lo encontró. Esa venta no aparece en ningún reporte.</p></div>
+    <div class="costo"><span class="n-costo">03</span><h3>Alguien del equipo trabaja de más</h3><p>Precios y stock a mano, ficha por ficha, y las mismas respuestas todo el día.</p></div>
   </div>
+</section>
+
+<section class="env seccion" id="servicios">
+  <h2 class="rotulo">Qué hacemos</h2>
+  <div class="servicios">
+    <article class="srv"><h3>Tiendas para catálogos complejos</h3><p>Búsqueda por vehículo, patente o medida; cotizaciones cuando no hay stock; sincronización con tus proveedores y un asistente de WhatsApp que responde y deriva.</p></article>
+    <article class="srv"><h3>Migración sin perder Google</h3><p>Desde WordPress o Shopify: cada dirección antigua lleva a su equivalente en el sitio nuevo.</p></article>
+    <article class="srv"><h3>Asesoría</h3><p>Decidir antes de gastar: qué construir, qué no, y cuánto te va a costar mantenerlo.</p></article>
+    <article class="srv"><h3>Automatización de la operación</h3><p>Lo que hoy alguien hace a mano: stock, precios, pedidos, cotizaciones y avisos.</p></article>
+  </div>
+</section>
+
+<section class="env seccion" id="comparacion">
+  <h2 class="rotulo">Comparación</h2>
+  <p class="tit-sec">Cuando Shopify ya no alcanza</p>
+  <p class="comp-intro">Shopify es excelente para un catálogo simple. VTEX resuelve el complejo, a precio de empresa grande. Nosotros hacemos lo segundo al tamaño de tu negocio.</p>
+  <p class="desliza" aria-hidden="true">Desliza la tabla para ver las demás →</p>
+  <div class="tabla-env" role="region" aria-label="Comparación de plataformas" tabindex="0">
+    <table class="comp">
+      <thead>
+        <tr><th scope="col"><span class="sr">Característica</span></th><th scope="col" class="nos">Plataformas Web</th><th scope="col">Shopify</th><th scope="col">VTEX</th><th scope="col">WordPress + WooCommerce</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Búsqueda por vehículo o compatibilidad</th><td class="nos">Incluida, con tu catálogo de compatibilidades</td><td>App aparte, de US$5 a US$250 al mes</td><td>Sí, la configura el implementador</td><td>Plugin de terceros</td></tr>
+        <tr><th scope="row">Búsqueda por patente chilena</th><td class="nos">Incluida, por patente y VIN</td><td>No la trae</td><td>Desarrollo a medida</td><td>No la trae</td></tr>
+        <tr><th scope="row">Stock y precio del proveedor</th><td class="nos">Incluida, cada noche</td><td>App o a mano</td><td>Integración a medida</td><td>Plugin o a mano</td></tr>
+        <tr><th scope="row">Consulta sin stock</th><td class="nos">Queda como cotización y te avisa</td><td>Se pierde (de fábrica)</td><td>Según la implementación</td><td>Se pierde</td></tr>
+        <tr><th scope="row">WhatsApp</th><td class="nos">Asistente oficial que cotiza y deriva a una persona</td><td>App aparte</td><td>Integración aparte</td><td>Botón a un chat vacío</td></tr>
+        <tr><th scope="row">Pago en Chile</th><td class="nos">Flow integrado, sin comisión de plataforma</td><td>Webpay o Flow con un recargo de Shopify de 0,6 % a 2 % por venta: Shopify Payments no opera en Chile</td><td>Sí</td><td>Plugin</td></tr>
+        <tr><th scope="row">Costo</th><td class="nos">Proyecto con precio cerrado y mantención mensual</td><td>US$19 a US$399 al mes, más apps y el recargo por venta</td><td>No publica precios: se cotiza con ventas</td><td>Hosting, plugins y quien lo mantenga</td></tr>
+        <tr><th scope="row">De quién es</th><td class="nos">Tuya: el código y los datos</td><td>La arriendas</td><td>La licencias</td><td>Tuya, atada a plugins</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="comp-nota">Precios de Shopify según shopify.com/pricing y su lista de países de Shopify Payments (octubre de 2026). VTEX no publica precios.</p>
 </section>
 
 <section class="env seccion" id="trabajos">
@@ -363,6 +429,15 @@
         <li><b>Velocidad medida</b>: en STOM, de 22,6 a 3,3 segundos hasta ver el contenido.</li>
       </ul>
     </article>
+  </div>
+</section>
+
+<section class="env seccion" id="contratacion">
+  <h2 class="rotulo">Cómo se contrata</h2>
+  <div class="costos">
+    <div class="costo"><h3>Proyecto con precio cerrado</h3><p>Diseño, desarrollo, carga o migración del catálogo y puesta en marcha. Sabes cuánto cuesta antes de empezar.</p></div>
+    <div class="costo"><h3>Mantención mensual</h3><p>Servidor, respaldos probados, seguridad, soporte y mejoras pequeñas, para que la tienda siga funcionando y creciendo.</p></div>
+    <div class="costo"><h3>La plataforma es tuya</h3><p>El código y los datos son tuyos. Si un día te vas, te los llevas.</p></div>
   </div>
 </section>
 

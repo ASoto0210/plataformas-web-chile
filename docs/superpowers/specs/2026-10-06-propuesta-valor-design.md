@@ -48,7 +48,7 @@ Tres costos, en tres columnas cortas:
 Bajada: «Shopify es excelente para un catálogo simple. VTEX resuelve el complejo, a precio de empresa grande.
 Nosotros hacemos lo segundo al tamaño de tu negocio.»
 
-| | WordPress + WooCommerce | Shopify | VTEX | Plataformas Web |
+| | Plataformas Web | Shopify | VTEX | WordPress + WooCommerce |
 |---|---|---|---|---|
 | Búsqueda por vehículo o compatibilidad | Plugin de terceros | App aparte, de US$5 a US$250/mes | Sí, la configura el implementador | **Incluida, con tu catálogo de compatibilidades** |
 | Búsqueda por patente chilena | No la trae | No la trae | Desarrollo a medida | **Incluida (patente y VIN)** |
@@ -98,3 +98,7 @@ Nota al pie: «Precios de Shopify según shopify.com/pricing (octubre 2026). VTE
 - Render en escritorio (1366) y celular real (iframe de 390 px); la tabla en celular se lee como tarjetas por
   plataforma o con desplazamiento horizontal contenido (sin scroll de página).
 - Revisar que cada dato de la tabla tenga su fuente en esta lista.
+
+## Implementación (06-10-2026)
+- Columna de Plataformas Web en primer lugar (en celular la tabla se desliza y la nuestra se ve sin deslizar), aviso «Desliza la tabla» solo en pantallas chicas.
+- Menú: Qué hacemos, Comparación, Trabajos, Qué incluye, Contacto («Cómo trabajamos» sigue en la página).
