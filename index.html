@@ -74,7 +74,10 @@
   @media (max-width:760px){
     .barra .env{flex-direction:column;align-items:flex-start;height:auto;
       gap:4px;padding-top:14px;padding-bottom:6px}
-    .barra nav{flex-wrap:wrap;gap:6px 20px;width:100%}
+    .barra nav{flex-wrap:wrap;gap:0 20px;width:100%}
+    /* Con cinco enlaces el menu ocupa dos lineas: 38 px de alto por enlace sigue
+       sobre el minimo tactil de WCAG 2.2 (24 px) y no deja un hueco entre filas. */
+    .barra nav a{min-height:38px}
   }
 
   /* padding-block y NO el atajo 'padding: X 0': estos elementos tambien llevan
@@ -155,6 +158,23 @@
   @media (max-width:620px){.caso-pie{flex-direction:column;align-items:flex-start;gap:11px}}
   @media (max-width:760px){.caso-cols{grid-template-columns:1fr}}
 
+  /* Practicas: seis areas iguales, sin jerarquia entre ellas (a diferencia de los
+     servicios). Cada una lleva prueba concreta, no adjetivos. */
+  .practicas-intro{color:var(--gris);max-width:62ch;margin:-12px 0 28px;font-size:15.5px}
+  .practicas{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--linea);
+    border:1px solid var(--linea);border-radius:var(--r);overflow:hidden}
+  .prac{background:var(--sup);padding:clamp(22px,2.4vw,30px)}
+  .prac .eti-p{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--dato);margin:0 0 10px}
+  .prac h3{font-size:18px;margin:0 0 12px;font-weight:600;letter-spacing:-.012em;color:var(--hueso)}
+  .prac ul{margin:0;padding-left:17px;color:var(--gris);font-size:14px;line-height:1.55}
+  .prac li{margin-bottom:8px}
+  .prac li:last-child{margin-bottom:0}
+  .prac li::marker{color:var(--dato)}
+  .prac li b{color:var(--tinta);font-weight:600}
+  @media (max-width:980px){.practicas{grid-template-columns:1fr 1fr}}
+  @media (max-width:640px){.practicas{grid-template-columns:1fr}}
+
   /* Las etapas SI son una secuencia: aqui el numero informa. */
   .etapa{display:grid;grid-template-columns:100px 1fr;gap:22px;padding:24px 0;
     border-bottom:1px solid var(--linea);align-items:start}
@@ -217,7 +237,7 @@
 
 <header class="barra"><div class="env">
   <a class="marca" href="#top"><span class="capas" aria-hidden="true"><i></i><i></i><i></i></span>Plataformas Web Chile</a>
-  <nav><a href="#servicios">Servicios</a><a href="#trabajos">Trabajos</a><a href="#proceso">Cómo trabajamos</a><a href="#contacto">Contacto</a></nav>
+  <nav><a href="#servicios">Servicios</a><a href="#trabajos">Trabajos</a><a href="#practicas">Qué incluye</a><a href="#proceso">Cómo trabajamos</a><a href="#contacto">Contacto</a></nav>
 </div></header>
 
 <main>
@@ -276,6 +296,74 @@
       <span>Publicado con el consentimiento del cliente.</span>
     </div>
   </article>
+</section>
+
+<section class="env seccion" id="practicas">
+  <h2 class="rotulo">Qué incluye cada plataforma</h2>
+  <p class="practicas-intro">No es una lista de buenas intenciones: es lo que ya funciona en producción en
+    <a href="casos/stom/">STOM</a>, y el estándar con el que partimos cada proyecto.</p>
+  <div class="practicas">
+    <article class="prac">
+      <p class="eti-p">Seguridad</p>
+      <h3>Protegida desde el primer día</h3>
+      <ul>
+        <li><b>Límite de intentos</b> por persona y verificación contra bots en los formularios públicos.</li>
+        <li><b>Archivos subidos revisados por su contenido</b>, no por su nombre, y cabeceras de seguridad en cada respuesta.</li>
+        <li>Correos con el texto del cliente <b>escapado</b>: nadie puede usar tu dominio para enviar phishing.</li>
+        <li><b>Revisiones de seguridad periódicas</b>, con cada hallazgo corregido y cubierto por una prueba.</li>
+      </ul>
+    </article>
+    <article class="prac">
+      <p class="eti-p">Panel de administración</p>
+      <h3>Tu negocio, sin depender de nadie</h3>
+      <ul>
+        <li><b>Pedidos con el estado del pago a la vista</b>: lo impago no se puede despachar.</li>
+        <li><b>Precios, campañas, cupones y banners</b> desde el panel; al terminar, cada precio vuelve a su valor.</li>
+        <li><b>Una cuenta por colaborador</b>, con permisos por sección que se revocan al instante.</li>
+        <li><b>Cotizaciones y conversaciones</b> en una bandeja, con el historial de cada cliente.</li>
+      </ul>
+    </article>
+    <article class="prac">
+      <p class="eti-p">SEO</p>
+      <h3>Que Google te encuentre por lo que vendes</h3>
+      <ul>
+        <li><b>Una página por cada búsqueda real</b> de tus clientes, no solo la portada y el catálogo.</li>
+        <li><b>Migración sin perder posiciones</b>: cada dirección antigua lleva a su equivalente nuevo.</li>
+        <li>Datos estructurados, sitemap y las <b>páginas vacías que Google castiga</b>, detectadas y corregidas.</li>
+        <li>Search Console <b>medido semana a semana</b>, con una línea base para comparar.</li>
+      </ul>
+    </article>
+    <article class="prac">
+      <p class="eti-p">Ventas y operación</p>
+      <h3>Una tienda que se atiende sola</h3>
+      <ul>
+        <li><b>Pago en línea y compra sin crear cuenta</b>, con cada cobro conciliado con la pasarela.</li>
+        <li><b>Aviso al instante</b> de cada pedido y cotización, por correo y WhatsApp.</li>
+        <li><b>Sincronización automática con proveedores</b>: stock y precio al día sin tocar una ficha.</li>
+        <li>Ventas por transferencia o en el local <b>dentro del mismo flujo</b> que las de la web.</li>
+      </ul>
+    </article>
+    <article class="prac">
+      <p class="eti-p">Calidad y continuidad</p>
+      <h3>Cambios sin sustos</h3>
+      <ul>
+        <li><b>Pruebas automáticas</b> antes de cada publicación: en STOM, más de 1.100.</li>
+        <li><b>Un ambiente de prueba</b> separado del real, con datos de verdad.</li>
+        <li><b>Respaldos que se prueban</b> restaurándolos, no solo guardándolos.</li>
+        <li>Los cambios delicados se <b>ensayan sobre una copia</b> antes de tocar la base real.</li>
+      </ul>
+    </article>
+    <article class="prac">
+      <p class="eti-p">Atención y medición</p>
+      <h3>Saber qué vende y responder a tiempo</h3>
+      <ul>
+        <li><b>Asistente de WhatsApp</b> sobre la API oficial, que deriva a una persona cuando no sabe.</li>
+        <li><b>Correo con tu dominio</b>, autenticado para no caer en spam.</li>
+        <li>Analítica, <b>píxeles de Meta y TikTok</b> y Search Console desde el lanzamiento.</li>
+        <li><b>Velocidad medida</b>: en STOM, de 22,6 a 3,3 segundos hasta ver el contenido.</li>
+      </ul>
+    </article>
+  </div>
 </section>
 
 <section class="env seccion" id="proceso">
