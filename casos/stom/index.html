@@ -377,7 +377,7 @@
   var pista = new Audio();
   pista.preload = 'none';
 
-  function ruta(k) { return 'audio/caso-' + (k < 10 ? '0' + k : k) + '.mp3'; }
+  function ruta(k) { return 'audio/caso-' + (k < 10 ? '0' + k : k) + '.mp3?v=lorenzo'; }
 
   function pintar() {
     bloques.forEach(function (b, k) { b.classList.toggle('leyendo', narrando && k === i); });
