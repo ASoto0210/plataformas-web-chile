@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Firma de correo — Plataformas Web Chile</title>
+</head>
+<body style="margin:16px;background:#ffffff;">
+<!-- Firma de correo de Plataformas Web Chile.
+
+     Cómo instalarla: abrir este archivo en el navegador, seleccionar todo (Ctrl+A), copiar
+     (Ctrl+C) y pegar en Gmail → Configuración → Ver todos los ajustes → Firma. Si se usa el
+     «Enviar como» de hola@plataformasweb.cl, asignarla a ESA dirección en «Valores
+     predeterminados de firma», para no pisar las otras.
+
+     Reglas que ya costaron caro en la firma de STOM:
+     - todo con estilos EN LÍNEA: Gmail borra las hojas de estilo;
+     - maquetado con <table>, no con flex ni grid;
+     - la única imagen es el logo, y va por URL pública (los clientes de correo no muestran
+       SVG ni data-URI). Las redes van como texto: un icono bloqueado deja un hueco feo, y
+       una firma que se lee igual con las imágenes apagadas es mejor firma.
+     - el nombre va completo, «Plataformas Web Chile», y pegado al dominio: hay otra empresa
+       chilena del mismo rubro en plataformas-web.cl (con guion) y el nombre no es registrable
+       por descriptivo, así que la diferencia la hace usarlo entero siempre.
+
+     El logo vive en https://plataformasweb.cl/email/firma-logo.png (carpeta email/ del repo,
+     que GitHub Pages sirve tal cual). Generado con Pillow desde icono-color.svg: 128 px para
+     que se vea nítido en pantallas retina, mostrado a 56. -->
+<table cellpadding="0" cellspacing="0" border="0" style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.45;color:#2B2722;border-top:3px solid #C9AF82;margin-top:16px;">
+  <tr>
+    <td valign="top" style="padding:14px 14px 0 0;">
+      <a href="https://plataformasweb.cl/?utm_source=firma&amp;utm_medium=email&amp;utm_campaign=firma" style="text-decoration:none;"><img src="https://plataformasweb.cl/email/firma-logo.png" width="56" height="56" alt="Plataformas Web Chile" style="display:block;border:0;border-radius:12px;"></a>
+    </td>
+    <td valign="top" style="padding-top:14px;">
+      <div style="font-size:16px;font-weight:bold;color:#100E0B;">Antonio Soto</div>
+      <div style="font-size:14px;font-weight:bold;color:#7A5F2E;letter-spacing:.2px;">Plataformas Web Chile</div>
+      <div style="color:#6B655C;">Tiendas online para catálogos complejos</div>
+      <div style="margin-top:7px;">
+        <a href="https://plataformasweb.cl/?utm_source=firma&amp;utm_medium=email&amp;utm_campaign=firma" style="color:#7A5F2E;font-weight:bold;text-decoration:none;">plataformasweb.cl</a>
+        &nbsp;·&nbsp;
+        <a href="mailto:hola@plataformasweb.cl" style="color:#7A5F2E;text-decoration:none;">hola@plataformasweb.cl</a>
+        &nbsp;·&nbsp;
+        <a href="https://wa.me/56999918241" style="color:#7A5F2E;text-decoration:none;">WhatsApp +56 9 9991 8241</a>
+      </div>
+      <div style="margin-top:3px;color:#6B655C;">
+        <a href="https://www.instagram.com/plataformasweb.cl/" style="color:#6B655C;text-decoration:none;">Instagram</a>
+        &nbsp;·&nbsp;
+        <a href="https://www.facebook.com/people/Plataformas-Web-Chile/61591889621973/" style="color:#6B655C;text-decoration:none;">Facebook</a>
+        &nbsp;·&nbsp; Santiago, Chile
+      </div>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
