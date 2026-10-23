@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seguridad PHP: cómo verificar y actuar · Plataformas Web Chile</title>
+<meta name="description" content="Guía para comprobar la exposición a CVE-2026-109618 y CVE-2026-109619, solicitar parches y responder ante indicios de intrusión. Con fuentes oficiales.">
+<link rel="canonical" href="https://plataformasweb.cl/guias/seguridad-php/">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="stylesheet" href="../../fuentes/fuentes-v4.css">
+<meta name="theme-color" content="#100E0B">
+<meta property="og:type" content="article">
+<meta property="og:title" content="¿Tu sitio usa PHP? Cómo verificar y actuar">
+<meta property="og:description" content="Identifica el servicio, verifica el parche y distingue una vulnerabilidad de un incidente. Guía con fuentes oficiales.">
+<meta property="og:url" content="https://plataformasweb.cl/guias/seguridad-php/">
+<meta property="og:image" content="https://plataformasweb.cl/og-image.png">
+<meta property="og:image:alt" content="Plataformas Web Chile">
+<meta property="og:site_name" content="Plataformas Web Chile">
+<meta property="og:locale" content="es_CL">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://plataformasweb.cl/og-image.png">
+<style>
+  :root{color-scheme:dark;--fondo:#100E0B;--sup:#181510;--tinta:#EFEBE3;--gris:#B4ADA1;--hueso:#E4DCCB;--dato:#C9AF82;--linea:#494137}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--fondo);color:var(--tinta);font-family:Archivo,"Segoe UI",sans-serif;line-height:1.7}
+  .hoja{max-width:820px;margin:auto;padding:30px clamp(20px,5vw,48px) 65px}
+  a{color:var(--hueso);text-underline-offset:4px;overflow-wrap:anywhere}
+  a:hover{color:var(--dato)}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--dato);outline-offset:4px}
+  .marca{display:inline-flex;align-items:center;min-height:44px;font-weight:600;text-decoration:none}
+  .marca img{width:24px;height:24px;margin-right:10px}
+  header{padding:45px 0 30px;border-bottom:1px solid var(--linea)}
+  .rotulo{color:var(--dato);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+  h1{font-size:clamp(32px,6vw,54px);line-height:1.08;letter-spacing:-.035em;margin:15px 0 24px;text-wrap:balance}
+  h2{font-size:clamp(23px,4vw,30px);line-height:1.2;letter-spacing:-.02em;margin:0 0 22px;text-wrap:balance}
+  h3{font-size:19px;line-height:1.4;margin-top:28px}
+  p,li{font-size:17px}
+  li{padding-left:4px;margin-bottom:12px}
+  ul,ol{padding-left:24px}
+  section{padding-top:48px;scroll-margin-top:20px}
+  .fecha,.fuente,footer{font-size:14px;color:var(--gris)}
+  .fuente a{color:inherit}
+  .aviso{border-left:3px solid var(--dato);padding:8px 20px;background:var(--sup);margin:25px 0}
+  .indice{padding:24px 0;border-bottom:1px solid var(--linea)}
+  .indice ol{margin:8px 0}
+  .indice li{margin:0}
+  .indice a{display:inline-block;padding:5px 0;min-height:38px}
+  .tabla{overflow-x:auto;border:1px solid var(--linea);border-radius:6px}
+  table{border-collapse:collapse;width:100%;font-size:16px}
+  th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--linea)}
+  tr:last-child td{border-bottom:0}
+  th{background:var(--sup);color:var(--hueso)}
+  code{font-family:Consolas,monospace;overflow-wrap:anywhere}
+  pre{padding:20px;background:var(--sup);white-space:pre-wrap;overflow-wrap:anywhere;border:1px solid var(--linea);font:15px/1.7 Consolas,monospace}
+  blockquote{margin:24px 0;padding:12px 22px;border-left:3px solid var(--dato);background:var(--sup)}
+  .boton{display:inline-flex;align-items:center;min-height:46px;padding:8px 18px;border:1px solid var(--dato);border-radius:6px;background:transparent;color:var(--hueso);font:inherit;cursor:pointer;text-decoration:none}
+  footer{padding-top:36px;margin-top:48px;border-top:1px solid var(--linea)}
+  @media print{body{background:white;color:#181510}.hoja{max-width:none;padding:0}.marca,.indice,.boton{display:none}a,.fuente,.fecha,footer{color:#333}.aviso,pre,blockquote,th{background:#f5f2ed}section{padding-top:24px}h2,h3{break-after:avoid}table,blockquote{break-inside:avoid}}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Seguridad PHP: cómo verificar y actuar","description":"Guía de verificación y respuesta para CVE-2026-109618 y CVE-2026-109619, con fuentes oficiales.","datePublished":"2026-10-23","dateModified":"2026-10-23","inLanguage":"es-CL","author":{"@type":"Organization","name":"Plataformas Web Chile","url":"https://plataformasweb.cl/"},"publisher":{"@type":"Organization","name":"Plataformas Web Chile","logo":{"@type":"ImageObject","url":"https://plataformasweb.cl/og-image.png"}},"mainEntityOfPage":"https://plataformasweb.cl/guias/seguridad-php/"}
+</script>
+</head>
+<body>
+<main class="hoja">
+<a class="marca" href="../../"><img src="../../icono-color.svg" alt="">Plataformas Web Chile</a>
+<article>
+<header>
+  <p class="rotulo">Guía práctica · Seguridad web</p>
+  <h1>¿Tu sitio usa PHP? Cómo verificar y actuar.</h1>
+  <p>Un aviso de seguridad exige comprobar qué ejecuta tu servidor, aplicar la corrección y verificar el resultado. Aquí tienes los pasos y las preguntas para tu proveedor.</p>
+  <p class="fecha">Publicado y revisado: <time datetime="2026-10-23">23 de octubre de 2026</time> · Por Plataformas Web Chile</p>
+  <div class="aviso"><p><strong>Usar PHP, tener una vulnerabilidad y haber sufrido una intrusión son estados distintos.</strong> Esta guía no diagnostica ningún sitio particular. La ausencia de señales visibles tampoco garantiza que esté protegido.</p></div>
+  <button class="boton" type="button" onclick="window.print()">Imprimir o guardar como PDF</button>
+</header>
+<nav class="indice" aria-label="Contenido del instructivo">
+  <ol>
+    <li><a href="#aviso">Qué está confirmado</a></li>
+    <li><a href="#verificacion">Cómo verificar tu instalación</a></li>
+    <li><a href="#correccion">Qué hacer si falta el parche</a></li>
+    <li><a href="#temporal">Si no puedes actualizar de inmediato</a></li>
+    <li><a href="#incidente">Si sospechas una intrusión</a></li>
+    <li><a href="#proveedor">Mensaje para tu proveedor</a></li>
+    <li><a href="#cierre">Cómo cerrar la revisión</a></li>
+  </ol>
+</nav>
+<section id="aviso">
+  <h2>1. Qué está confirmado</h2>
+  <p>El proyecto PHP publicó correcciones para <strong>CVE-2026-109618</strong> y <strong>CVE-2026-109619</strong>. Son fallos de gestión de memoria que, bajo determinadas condiciones, permiten ejecutar código remoto sin autenticación.</p>
+  <p>El primer aviso describe memoria que queda en un estado inválido al agotarse una asignación. El segundo trata de referencias a memoria liberada que persisten entre peticiones. La configuración y la forma de ejecutar PHP influyen en la exposición.</p>
+  <p class="fuente">Fuentes: avisos del proyecto PHP para <a href="https://github.com/php/php-src/security/advisories/GHSA-w8hw-w9fx-j79w">CVE-2026-109618</a> y <a href="https://github.com/php/php-src/security/advisories/GHSA-6wmf-4rv5-p3rp">CVE-2026-109619</a>.</p>
+  <p>Las primeras versiones corregidas de las ramas mantenidas son:</p>
+  <div class="tabla"><table><thead><tr><th scope="col">Rama</th><th scope="col">Versión corregida</th></tr></thead><tbody><tr><td>PHP 8.2</td><td>8.2.35</td></tr><tr><td>PHP 8.3</td><td>8.3.36</td></tr><tr><td>PHP 8.4</td><td>8.4.27</td></tr><tr><td>PHP 8.5</td><td>8.5.12</td></tr></tbody></table></div>
+  <p>Estos números son una referencia fechada, no una recomendación de quedarse en ellos: revisa las actualizaciones posteriores de tu rama.</p>
+  <p class="fuente">Fuente: <a href="https://www.php.net/archive/2026.php">PHP, aviso de seguridad del 21 de octubre</a>.</p>
+</section>
+<section id="verificacion">
+  <h2>2. Cómo verificar tu instalación</h2>
+  <ol>
+    <li><strong>Identifica los servicios.</strong> Incluye el sitio, subdominios, pruebas, paneles, webmail y productos que incorporen PHP. Prioriza lo accesible desde internet.</li>
+    <li><strong>Pide evidencia al responsable.</strong> Anota dominio, versión completa, paquete del proveedor, modo de ejecución y estado de ambos CVE. Un enlace terminado en <code>.html</code> o la falta de cabeceras PHP no resuelven la pregunta.</li>
+    <li><strong>Si no tienes inventario o acceso, registra “pendiente de confirmar”.</strong> Evita declarar vulnerable o protegido un servicio basándote solo en su aspecto.</li>
+  </ol>
+  <p class="fuente">Base del procedimiento: <a href="https://www.ncsc.gov.uk/news/critical-security-issue-affecting-php">NCSC, identificación de instalaciones y productos que incorporan PHP</a>. Los campos de registro son nuestra propuesta operativa.</p>
+  <h3>En WordPress</h3>
+  <p>Entra a <strong>Herramientas → Salud del sitio → Información → Servidor</strong> y registra la versión de PHP. Complementa el dato con la confirmación del hosting sobre el paquete instalado.</p>
+  <p class="fuente">Fuente: <a href="https://make.wordpress.org/hosting/handbook/server-environment/">WordPress, cómo consultar el entorno del servidor</a>.</p>
+  <h3>Si administras el servidor</h3>
+  <p>Estos comandos de consulta ayudan a identificar el PHP de consola:</p>
+  <pre><code>php -v
+php --ini</code></pre>
+  <p><strong>La consola puede usar otro PHP distinto del que atiende la web.</strong> Contrasta el resultado con cada servicio, pool, contenedor o configuración del dominio. No publiques archivos de diagnóstico con información interna para hacer esta comprobación.</p>
+  <p class="fuente">Referencia de los comandos: <a href="https://www.php.net/manual/en/features.commandline.options.php">manual oficial de PHP, opciones de consola</a>.</p>
+  <h3>Ojo con los parches del proveedor</h3>
+  <p>Un distribuidor puede incorporar la corrección sin cambiar al número de versión de la tabla. Solicita su boletín o revisión de paquete que confirme ambos CVE. Para ramas antiguas, verifica el soporte real y planifica la migración.</p>
+  <p class="fuente">Fuente: <a href="https://www.php.net/archive/2026.php">PHP, paquetes de proveedores, soporte LTS y parches adaptados a ramas antiguas</a>.</p>
+</section>
+<section id="correccion">
+  <h2>3. Qué hacer si falta el parche</h2>
+  <p>Asigna un responsable y una ventana urgente de intervención. Nuestra secuencia de trabajo propuesta es:</p>
+  <ol>
+    <li>Si hay señales de intrusión, sigue primero el apartado de respuesta a incidentes.</li>
+    <li>Respalda archivos, base de datos y configuración; confirma que puedes recuperarlos.</li>
+    <li>Valida rápidamente la compatibilidad en un entorno restringido y actualiza desde el canal oficial de tu proveedor.</li>
+    <li>Reinicia o reemplaza, según la plataforma, los procesos que ejecutaban PHP para que carguen el parche. Cambiar el archivo instalado no prueba qué código sigue en memoria.</li>
+    <li>Comprueba la versión o revisión efectiva de cada servicio y prueba acceso, formularios, sesiones y compra. Usa pruebas controladas para evitar cobros o pedidos reales.</li>
+  </ol>
+  <p>Guarda el resultado. Actualizar WordPress y sus extensiones es una tarea complementaria: debes verificar también la corrección del intérprete PHP.</p>
+  <p class="fuente">Base: <a href="https://www.ncsc.gov.uk/collection/vulnerability-management/guidance/responding-to-active-exploitation">NCSC, actualización urgente, pruebas y verificación</a>. La secuencia de respaldo y comprobación funcional es nuestra recomendación operativa.</p>
+</section>
+<section id="temporal">
+  <h2>4. Si no puedes actualizar de inmediato</h2>
+  <p>Escala al hosting. Pide que evalúe las mitigaciones oficiales para tu configuración y, si no puede controlar la exposición, la restricción o suspensión temporal del servicio. Un WAF puede complementar la defensa; no acredita que PHP esté corregido.</p>
+  <p class="fuente">Fuente: <a href="https://www.ncsc.gov.uk/news/critical-security-issue-affecting-php">NCSC, prioridades de mitigación y retirada temporal del servicio</a>.</p>
+  <div class="aviso"><p><strong>Actualización del 23 de octubre:</strong> PHP recomienda desactivar temporalmente <code>session.upload_progress.enabled</code> ante una vía adicional poco habitual, identificada como <strong>CVE-2026-115560</strong>. Requiere una combinación específica de configuración y cambios del serializador de sesiones durante la ejecución. Es un aviso adicional: no sustituye los dos parches anteriores.</p></div>
+  <p>El administrador debe revisar la configuración efectiva, las necesidades de la aplicación y las novedades del aviso. Las mitigaciones temporales no equivalen a corregir todas las vías de ataque.</p>
+  <p>Si corresponde aplicar esa medida, configura <code>session.upload_progress.enabled=0</code> antes del procesamiento de peticiones y reinicia los workers. El aviso indica que <code>ini_set()</code> y el archivo <code>.user.ini</code> de FPM no sirven para esta mitigación. Ante sospecha de intrusión, coordina primero la preservación de evidencias.</p>
+  <p class="fuente">Fuente: <a href="https://www.php.net/archive/2026.php">PHP, avisos del 21 y 23 de octubre</a>.</p>
+</section>
+<section id="incidente">
+  <h2>5. Si sospechas una intrusión</h2>
+  <p>Archivos, usuarios o tareas desconocidas, redirecciones y comunicaciones inusuales justifican una investigación. Por sí solos no atribuyen el problema a estos CVE. Tampoco una página que carga normalmente descarta una intrusión.</p>
+  <ol>
+    <li><strong>Contén y escala.</strong> Contacta al hosting o al equipo de respuesta. Restringe el sistema afectado y conserva un canal de atención alternativo para el negocio.</li>
+    <li><strong>Preserva evidencias.</strong> Registra horas y acciones; conserva registros y solicita capturas de disco y memoria cuando proceda. Evita borrar o reiniciar antes de coordinar su recogida.</li>
+    <li><strong>Investiga el alcance.</strong> Revisa cuentas, cambios y otros servicios accesibles desde el sistema. Aplicar el parche no demuestra que un acceso previo haya desaparecido.</li>
+    <li><strong>Recupera con evidencia.</strong> Si se confirma compromiso, elimina persistencias o reconstruye desde una base confiable, corrige la causa y revisa los accesos antes de reabrir.</li>
+    <li><strong>Protege los accesos expuestos.</strong> Desde un equipo confiable y dentro del plan de respuesta, cambia contraseñas y claves que pudieron quedar comprometidas y revoca sesiones o tokens afectados. Evita introducir claves nuevas en un sistema que siga bajo control del atacante.</li>
+  </ol>
+  <p class="fuente">Fuentes: <a href="https://www.cyber.gc.ca/en/guidance/what-do-when-your-organization-has-been-compromised-cyber-attack-itsap00009">Centro Canadiense de Ciberseguridad, contención y evidencia</a>, <a href="https://www.ncsc.gov.uk/collection/vulnerability-management/guidance/responding-to-active-exploitation">NCSC, investigación y recuperación</a> y <a href="https://www.cisa.gov/stopransomware/ransomware-guide">CISA, guía de respuesta y recuperación</a>. Son pautas generales de respuesta; no indicadores exclusivos de estos CVE.</p>
+</section>
+<section id="proveedor">
+  <h2>6. Mensaje para tu proveedor</h2>
+  <p>Copia y completa este texto; no requiere enviar contraseñas:</p>
+  <blockquote><p>Solicito revisar el dominio [dominio] y los servicios asociados por CVE-2026-109618 y CVE-2026-109619.</p><p>Por favor, confirmen versión y revisión de PHP, modo de ejecución, boletín que acredita ambos parches y fecha de actualización de los procesos activos. Indiquen también si aplica el aviso del 23 de octubre sobre session.upload_progress.</p><p>Si falta la corrección, necesitamos responsable, plazo y medidas temporales. Si encuentran indicios de compromiso, solicitamos preservar evidencias y coordinar la respuesta antes de realizar una limpieza.</p></blockquote>
+  <p>Esta es una plantilla de Plataformas Web Chile para solicitar una comprobación, no una afirmación de vulnerabilidad.</p>
+</section>
+<section id="cierre">
+  <h2>7. Cómo cerrar la revisión</h2>
+  <p>Para nuestro registro proponemos estas categorías:</p>
+  <ul>
+    <li><strong>Pendiente:</strong> no hay evidencia suficiente.</li>
+    <li><strong>No aplica al servicio revisado:</strong> el responsable confirmó que no ejecuta PHP; deja anotado el alcance.</li>
+    <li><strong>Corrección pendiente:</strong> se identificó un paquete sin parche confirmado.</li>
+    <li><strong>Parche verificado:</strong> hay evidencia del paquete y los procesos activos. No equivale a certificar ausencia de intrusión.</li>
+    <li><strong>Incidente en investigación:</strong> existen indicios que requieren análisis, incluso si ya se actualizó.</li>
+  </ul>
+  <p>Registra responsable, fecha, servicios, evidencia, pruebas y próxima revisión. Consulta las fuentes antes de reutilizar esta guía: las versiones y recomendaciones pueden cambiar.</p>
+  <p><a class="boton" href="mailto:hola@plataformasweb.cl?subject=Revisi%C3%B3n%20de%20seguridad%20PHP">Solicitar ayuda para la revisión</a></p>
+</section>
+</article>
+<footer>Plataformas Web Chile · Orientación general basada en fuentes primarias.<br><a href="../../">Volver a plataformasweb.cl</a></footer>
+</main>
+</body>
+</html>
