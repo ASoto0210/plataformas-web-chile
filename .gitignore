@@ -3,3 +3,6 @@ _wrap.html
 png/_err.txt
 *.tmp
 _shots/
+_site*/
+__pycache__/
+*.pyc

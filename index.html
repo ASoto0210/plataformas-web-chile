@@ -71,11 +71,11 @@
   /* En telefono la barra se apila: el menu NO se esconde. Ocultarlo sin poner
      una hamburguesa deja el sitio sin navegacion en el dispositivo donde mas
      se navega. */
-  @media (max-width:760px){
+  @media (max-width:980px){
     .barra .env{flex-direction:column;align-items:flex-start;height:auto;
       gap:4px;padding-top:14px;padding-bottom:6px}
     .barra nav{flex-wrap:wrap;gap:0 20px;width:100%}
-    /* Con cinco enlaces el menu ocupa dos lineas: 38 px de alto por enlace sigue
+    /* El menu se reparte en varias lineas: 38 px de alto por enlace sigue
        sobre el minimo tactil de WCAG 2.2 (24 px) y no deja un hueco entre filas. */
     .barra nav a{min-height:38px}
   }
@@ -280,7 +280,7 @@
 
 <header class="barra"><div class="env">
   <a class="marca" href="#top"><span class="capas" aria-hidden="true"><i></i><i></i><i></i></span>Plataformas Web Chile</a>
-  <nav><a href="#servicios">Qué hacemos</a><a href="#comparacion">Comparación</a><a href="#trabajos">Trabajos</a><a href="#practicas">Qué incluye</a><a href="#contacto">Contacto</a></nav>
+  <nav><a href="#servicios">Qué hacemos</a><a href="#comparacion">Comparación</a><a href="#trabajos">Trabajos</a><a href="#practicas">Qué incluye</a><a href="guias/">Guías</a><a href="#contacto">Contacto</a></nav>
 </div></header>
 
 <main>
@@ -473,7 +473,7 @@
       <a class="btn btn-fantasma" href="https://instagram.com/plataformasweb.cl" target="_blank" rel="noopener">Instagram</a>
     </div>
   </div>
-  <p style="margin-top:28px;color:var(--gris)">Seguridad web: <a href="guias/seguridad-php/" style="color:var(--hueso);text-decoration:underline;text-underline-offset:4px">cómo verificar PHP y actuar ante una vulnerabilidad</a>.</p>
+  <p style="margin-top:28px;color:var(--gris)">Para decidir con información: <a href="guias/" style="color:var(--hueso);text-decoration:underline;text-underline-offset:4px">guías para elegir, operar y proteger tu plataforma</a>.</p>
 </section>
 </main>
 

@@ -1,0 +1,56 @@
+name: Publicar sitio y guías
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    # 10:15 Chile en horario de verano; revisión diaria de fechas y fuentes.
+    - cron: '15 13 * * *'
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      TZ: America/Santiago
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Pruebas de publicación
+        run: python -B -m unittest discover -s tests -v
+      - name: Conservar el registro de URLs publicadas
+        shell: bash
+        run: |
+          status=$(curl --silent --show-error --location --retry 3 --max-time 45 --output previous.json --write-out '%{http_code}' https://plataformasweb.cl/guias/publicadas.json)
+          if [ "$status" = "404" ]; then
+            printf '{}\n' > previous.json
+          elif [ "$status" != "200" ]; then
+            echo "No se pudo comprobar el despliegue anterior ($status). No se publica para evitar retirar URLs por error."
+            exit 1
+          fi
+          python -c "import json; v=json.load(open('previous.json')); assert isinstance(v,dict)"
+      - name: Generar solo contenido publicable
+        run: python -B scripts/build_editorial.py --previous previous.json
+      - name: Validar enlaces y metadatos
+        run: python -B scripts/check_public_site.py _site
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Desplegar
+        id: deployment
+        uses: actions/deploy-pages@v4

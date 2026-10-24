@@ -1,5 +1,25 @@
 # Plataformas Web Chile
 
+## Guías y calendario editorial (24-10-2026)
+
+La portada sigue siendo HTML estático. La sección `/guias/` se genera con Python estándar
+desde `_editorial/catalog.json`, con control de fecha, revisión de fuentes y borradores.
+El workflow `.github/workflows/editorial.yml` despliega solo el sitio público; requiere
+**Settings → Pages → Source: GitHub Actions**. Mantener dominio y HTTPS existentes.
+
+Instrucciones completas: [`_editorial/README.md`](_editorial/README.md). Comprobaciones:
+
+```powershell
+python -B -m unittest discover -s tests -v
+python -B scripts/build_editorial.py --output _site
+python -B scripts/check_public_site.py _site
+```
+
+El destino debe estar vacío; para repetir usa otro nombre `_site-...`. No se publican
+fuentes editoriales, pruebas ni documentos internos en el artefacto. La calculadora
+se ejecuta en el navegador y no envía sus valores. No hay analítica externa configurada.
+
+
 Sitio propio de la agencia y el kit de marca. Publicado con **GitHub Pages** desde la rama
 `main`.
 

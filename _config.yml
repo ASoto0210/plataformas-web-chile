@@ -1,0 +1,8 @@
+# Respaldo para Pages con origen desde rama. El despliegue editorial usa _site.
+exclude:
+  - _editorial
+  - scripts
+  - tests
+  - docs/superpowers
+  - README.md
+  - gf.css
